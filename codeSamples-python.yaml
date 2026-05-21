@@ -1,0 +1,686 @@
+overlay: 1.0.0
+info:
+  title: CodeSamples overlay for python target
+  version: 0.0.0
+actions:
+  - target: $["paths"]["/api/ap2/agent-card"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: ap2GetAgentCard
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.ap2.ap2_get_agent_card()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/ap2/execute"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: ap2Execute
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.ap2.ap2_execute(card_id="<id>", card_token="<value>", amount=7776.54)
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/ap2/mandate"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: ap2CreateMandate
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.ap2.ap2_create_mandate(card_id="<id>", card_token="<value>", amount=173.14, merchant="<value>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/ap2/mandates/{card_id}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: ap2ListMandates
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.ap2.ap2_list_mandates(card_id="<id>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/ap2/payment-methods"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: ap2ListPaymentMethods
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.ap2.ap2_list_payment_methods()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/balance"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: fundingGetBalance
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.funding.funding_get_balance()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/cards"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: cardsList
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.cards.cards_list()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/cards/{id}/claim"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: cardsClaim
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.cards.cards_claim(id="<id>", token="<value>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/cards/{id}/controls"]["patch"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: cardsUpdateControls
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.cards.cards_update_controls(id="<id>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/cards/{id}/freeze"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: cardsFreeze
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.cards.cards_freeze(id="<id>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/cards/{id}/transactions"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: cardsListTransactions
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.cards.cards_list_transactions(id="<id>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/cards/{id}/unfreeze"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: cardsUnfreeze
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.cards.cards_unfreeze(id="<id>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/config"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: statusGetConfig
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt() as m_client:
+
+                res = m_client.status.status_get_config()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/funding/tokens"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: fundingListTokens
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt() as m_client:
+
+                res = m_client.funding.funding_list_tokens()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/issue"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: cardsCreate
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.cards.cards_create(purpose="Research Agent", limit_amount=50, network="eip155:8453", asset="USDC", single_use=False)
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/issue/bulk"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: cardsBulkCreate
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.cards.cards_bulk_create(cards=[], network="eip155:8453", asset="USDC")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/keys"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: keysList
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.keys.keys_list()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/keys/generate"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: keysCreate
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.keys.keys_create()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/keys/validate"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: keysValidate
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.keys.keys_validate()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/keys/{hash}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: keysRevoke
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.keys.keys_revoke(hash="<value>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/mpp/discover"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: mppDiscover
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.mpp.mpp_discover(url="https://dutiful-gallery.name/")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/mpp/pay"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: mppPay
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.mpp.mpp_pay(card_id="<id>", card_token="<value>", amount=7359.99, network="eip155:8453")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/mpp/receive"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: mppReceive
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.mpp.mpp_receive()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/mpp/session"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: mppCreateSession
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.mpp.mpp_create_session(card_id="<id>", card_token="<value>", merchant="<value>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/mpp/stream/close"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: mppStreamsClose
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.mpp.mpp_streams_close(stream_id="<id>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/mpp/stream/open"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: mppStreamsOpen
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.mpp.mpp_streams_open(card_id="<id>", card_token="<value>", budget=8538.9, tick_amount=1381.56)
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/mpp/stream/tick"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: mppStreamsTick
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.mpp.mpp_streams_tick(stream_id="<id>", card_id="<id>", card_token="<value>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/mpp/stream/{id}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: mppStreamsGet
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.mpp.mpp_streams_get(id="<id>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/pay/{code}/prepare"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: payLinksPrepare
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt() as m_client:
+
+                res = m_client.pay_links.pay_links_prepare(code="<value>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/pay/{code}/resolve"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: payLinksResolve
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt() as m_client:
+
+                res = m_client.pay_links.pay_links_resolve(code="<value>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/pay/{code}/settle"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: payLinksSettle
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt() as m_client:
+
+                res = m_client.pay_links.pay_links_settle(code="<value>", body={})
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/paylinks"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: payLinksList
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.pay_links.pay_links_list()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/paylinks"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: payLinksCreate
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.pay_links.pay_links_create(card_id="<id>", type_="SINGLE", max_uses=1)
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/paylinks/{code}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: payLinksCancel
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.pay_links.pay_links_cancel(code="<value>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/paylinks/{code}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: payLinksGet
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt() as m_client:
+
+                res = m_client.pay_links.pay_links_get(code="<value>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/paylinks/{code}/status"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: payLinksGetStatus
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt() as m_client:
+
+                res = m_client.pay_links.pay_links_get_status(code="<value>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/settlement/status/{txn_id}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: settlementGetStatus
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.settlement.settlement_get_status(txn_id="<id>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/status"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: statusGet
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt() as m_client:
+
+                res = m_client.status.status_get()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/x402/discover"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: x402Discover
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.x402.x402_discover(url="https://happy-fireplace.name/")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/x402/pay"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: x402Pay
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.x402.x402_pay(card_id="sx_a66a6666-...", card_token="tok_3b9fe670-...", amount=0.5, merchant="weather-api.com", merchant_address="0xABC...", network="eip155:8453")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/x402/receive"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: x402Receive
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.x402.x402_receive()
+
+                # Handle response
+                print(res)

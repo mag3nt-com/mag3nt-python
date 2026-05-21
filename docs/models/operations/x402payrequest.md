@@ -1,0 +1,15 @@
+# X402PayRequest
+
+
+## Fields
+
+| Field                                    | Type                                     | Required                                 | Description                              | Example                                  |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| `card_id`                                | *str*                                    | :heavy_check_mark:                       | Card identifier (sx_...)                 | sx_a66a6666-1234-5678-9abc-def012345678  |
+| `card_token`                             | *str*                                    | :heavy_check_mark:                       | Card secret token (tok_...)              | tok_3b9fe670-abcd-efgh-ijkl-mnopqrstuvwx |
+| `amount`                                 | *float*                                  | :heavy_check_mark:                       | Payment amount in USDC                   | 0.5                                      |
+| `merchant`                               | *Optional[str]*                          | :heavy_minus_sign:                       | Merchant identifier                      | weather-api.com                          |
+| `merchant_address`                       | *Optional[str]*                          | :heavy_minus_sign:                       | Merchant wallet for settlement           | 0xABC...                                 |
+| `mcc`                                    | *Optional[str]*                          | :heavy_minus_sign:                       | Merchant category code                   |                                          |
+| `resource_url`                           | *Optional[str]*                          | :heavy_minus_sign:                       | URL being paid for                       |                                          |
+| `network`                                | *Optional[str]*                          | :heavy_minus_sign:                       | N/A                                      |                                          |

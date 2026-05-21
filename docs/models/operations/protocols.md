@@ -1,0 +1,11 @@
+# Protocols
+
+
+## Fields
+
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `x402`                                                                   | [Optional[operations.X402]](../../models/operations/x402.md)             | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `ap2`                                                                    | [Optional[operations.Ap2]](../../models/operations/ap2.md)               | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `mpp`                                                                    | [Optional[operations.Mpp]](../../models/operations/mpp.md)               | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `settlement`                                                             | [Optional[operations.Settlement]](../../models/operations/settlement.md) | :heavy_minus_sign:                                                       | N/A                                                                      |

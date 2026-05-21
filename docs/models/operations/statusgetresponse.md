@@ -1,0 +1,14 @@
+# StatusGetResponse
+
+Platform status and protocol manifest
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `platform`                                                                   | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | N/A                                                                          | mag3nt                                                                       |
+| `version`                                                                    | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | N/A                                                                          | 0.5.0                                                                        |
+| `model`                                                                      | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | N/A                                                                          | bidirectional                                                                |
+| `protocols`                                                                  | [Optional[operations.Protocols]](../../models/operations/protocols.md)       | :heavy_minus_sign:                                                           | N/A                                                                          |                                                                              |
+| `card_controls`                                                              | [Optional[operations.CardControls]](../../models/operations/cardcontrols.md) | :heavy_minus_sign:                                                           | N/A                                                                          |                                                                              |
