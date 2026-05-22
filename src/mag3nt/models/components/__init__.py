@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from .balance import Balance, BalanceTypedDict
     from .card import Card, CardStatus, CardTypedDict, SingleUse
     from .paylink import PayLink, PayLinkStatus, PayLinkTypedDict
-    from .paymentheader import PaymentHeader, PaymentHeaderTypedDict
+    from .paymentheader import PaymentHeader, PaymentHeaderTypedDict, XMag3ntEnvironment
     from .security import Security, SecurityTypedDict
     from .transaction import Protocol, Transaction, TransactionTypedDict
 
@@ -33,6 +33,7 @@ __all__ = [
     "SingleUse",
     "Transaction",
     "TransactionTypedDict",
+    "XMag3ntEnvironment",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -50,6 +51,7 @@ _dynamic_imports: dict[str, str] = {
     "PayLinkTypedDict": ".paylink",
     "PaymentHeader": ".paymentheader",
     "PaymentHeaderTypedDict": ".paymentheader",
+    "XMag3ntEnvironment": ".paymentheader",
     "Security": ".security",
     "SecurityTypedDict": ".security",
     "Protocol": ".transaction",
