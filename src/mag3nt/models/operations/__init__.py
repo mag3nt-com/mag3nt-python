@@ -238,6 +238,7 @@ if TYPE_CHECKING:
         X402DiscoverResponseTypedDict,
     )
     from .x402pay import (
+        Environment,
         X402PayRequest,
         X402PayRequestTypedDict,
         X402PayResponse,
@@ -311,6 +312,7 @@ __all__ = [
     "CardsUpdateControlsRequestTypedDict",
     "CardsUpdateControlsResponse",
     "CardsUpdateControlsResponseTypedDict",
+    "Environment",
     "FundingGetBalanceResponse",
     "FundingGetBalanceResponseTypedDict",
     "FundingListTokensResponse",
@@ -610,6 +612,7 @@ _dynamic_imports: dict[str, str] = {
     "X402DiscoverRequestTypedDict": ".x402discover",
     "X402DiscoverResponse": ".x402discover",
     "X402DiscoverResponseTypedDict": ".x402discover",
+    "Environment": ".x402pay",
     "X402PayRequest": ".x402pay",
     "X402PayRequestTypedDict": ".x402pay",
     "X402PayResponse": ".x402pay",

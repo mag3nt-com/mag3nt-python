@@ -3,9 +3,11 @@
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `x_mag3nt_transaction` | *Optional[str]*        | :heavy_minus_sign:     | N/A                    |
-| `x_mag3nt_card`        | *Optional[str]*        | :heavy_minus_sign:     | N/A                    |
-| `x_mag3nt_amount`      | *Optional[str]*        | :heavy_minus_sign:     | N/A                    |
-| `x_mag3nt_protocol`    | *Optional[str]*        | :heavy_minus_sign:     | N/A                    |
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `x_mag3nt_transaction`                                                                   | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `x_mag3nt_card`                                                                          | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `x_mag3nt_amount`                                                                        | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `x_mag3nt_protocol`                                                                      | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `x_mag3nt_network`                                                                       | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | CAIP-2 network identifier                                                                |
+| `x_mag3nt_environment`                                                                   | [Optional[components.XMag3ntEnvironment]](../../models/components/xmag3ntenvironment.md) | :heavy_minus_sign:                                                                       | 'sandbox' for testnet networks, 'production' for mainnet                                 |

@@ -3,9 +3,16 @@
 from __future__ import annotations
 from datetime import datetime
 from mag3nt.models.components import paymentheader as components_paymentheader
-from mag3nt.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from mag3nt.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
 from pydantic import model_serializer
-from typing import Optional
+from typing import Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -70,6 +77,16 @@ class X402PayRequest(BaseModel):
         return m
 
 
+Environment = Union[
+    Literal[
+        "sandbox",
+        "production",
+    ],
+    UnrecognizedStr,
+]
+r"""'sandbox' for testnet networks (e.g. eip155:84532), 'production' for mainnet. Sandbox transactions deduct balance but are never settled on-chain."""
+
+
 class X402PayResponseTypedDict(TypedDict):
     r"""Payment authorized"""
 
@@ -78,6 +95,8 @@ class X402PayResponseTypedDict(TypedDict):
     card_id: NotRequired[str]
     amount: NotRequired[float]
     network: NotRequired[str]
+    environment: NotRequired[Environment]
+    r"""'sandbox' for testnet networks (e.g. eip155:84532), 'production' for mainnet. Sandbox transactions deduct balance but are never settled on-chain."""
     resource_url: NotRequired[Nullable[str]]
     protocol: NotRequired[str]
     timestamp: NotRequired[datetime]
@@ -97,6 +116,9 @@ class X402PayResponse(BaseModel):
 
     network: Optional[str] = None
 
+    environment: Optional[Environment] = None
+    r"""'sandbox' for testnet networks (e.g. eip155:84532), 'production' for mainnet. Sandbox transactions deduct balance but are never settled on-chain."""
+
     resource_url: OptionalNullable[str] = UNSET
 
     protocol: Optional[str] = None
@@ -114,6 +136,7 @@ class X402PayResponse(BaseModel):
                 "card_id",
                 "amount",
                 "network",
+                "environment",
                 "resource_url",
                 "protocol",
                 "timestamp",
