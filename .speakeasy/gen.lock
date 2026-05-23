@@ -1,17 +1,17 @@
 lockVersion: 2.0.0
-id: 5eff3589-8f22-444f-aec7-19b69f8472be
+id: 83981da0-3fc6-495a-9ed8-b732eeeea615
 management:
-  docChecksum: 3022963e34bfbdb1883af39866c98db1
+  docChecksum: f464ddd4210c550277f4babe3deb0969
   docVersion: "2026-05-23"
   speakeasyVersion: 1.764.1
   generationVersion: 2.885.1
-  releaseVersion: 0.1.4
-  configChecksum: f19320e7b739a7bb1954ce5a5377304d
+  releaseVersion: 0.1.5
+  configChecksum: 74cf48e98a15c75b3b19ac1593baefb0
   published: true
 persistentEdits:
-  generation_id: fcdfb1bd-8fa1-44c3-b82a-efd3c05c32ee
-  pristine_commit_hash: cbac96bc02122169b9dbd82591d2b3978308f33e
-  pristine_tree_hash: 38b9a5a6b2fbc651f4578ab90a0f676fac5349b7
+  generation_id: bf858bb2-abaa-498e-bcbc-e3a050e2c41b
+  pristine_commit_hash: cda76b54489154bad2c569038e40177376e382f7
+  pristine_tree_hash: e196eb7949ffbfedbacaa9e2358d8c421cb15f45
 features:
   python:
     additionalDependencies: 1.0.0
@@ -468,8 +468,8 @@ trackedFiles:
     pristine_git_object: fa2c1b058b862775330a4dc0ec428ac4250becdf
   docs/models/operations/paylinkscreaterequest.md:
     id: c5b3c18ad327
-    last_write_checksum: sha1:021b12f5f55ba61fa5d4c1ef7220cab249039b13
-    pristine_git_object: 5e348e36d9bf0eb9e56a785728893bb350119d93
+    last_write_checksum: sha1:bfd09d9af37255a677762183b935076778c10919
+    pristine_git_object: 43476a18adc10a90e418e46f95e7d05299f2f471
   docs/models/operations/paylinkscreatetype.md:
     id: a47b0a2b6be2
     last_write_checksum: sha1:23f4ca63be8f9d66166e6dbd14570db89d58dac5
@@ -656,8 +656,8 @@ trackedFiles:
     pristine_git_object: 5193003d027ae7cab146675b273955cdaf20a2a0
   docs/sdks/paylinks/README.md:
     id: 335dbafd1cc9
-    last_write_checksum: sha1:77cddf32c0dd6fe3a3528b601a03f00e37d6acac
-    pristine_git_object: 2451a2c5297e5cd690db2342f757ee2296469bcc
+    last_write_checksum: sha1:19c673e7860b0f300b8d2deafcb0ee170fd5fdbc
+    pristine_git_object: e01c4f05200f5dc2f7e0b74ba0c1371ba684ab7e
   docs/sdks/settlement/README.md:
     id: aad79a240744
     last_write_checksum: sha1:a727b99f8a0695b3d5f7e0bc3c303bc6861ea9ac
@@ -680,8 +680,8 @@ trackedFiles:
     pristine_git_object: c00200cfd072e9febac5d6be783da1925d11dac0
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:9e1914334411425045f89a0592faed7bc70a02c3
-    pristine_git_object: 2bd8fb9552a53eea971bdb591b1a78fff0b5703f
+    last_write_checksum: sha1:812dc80bf6306b94f9b2b4805841e1ef15441a7d
+    pristine_git_object: 0509f1ae1d11e1b4248761c79c6f668bdeb812eb
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:adc9b741c12ad1591ab4870eabe20f0d0a86cd1a
@@ -704,8 +704,8 @@ trackedFiles:
     pristine_git_object: 2ee1eaa954007a07ce3a8afb506da71f066d0965
   src/mag3nt/_version.py:
     id: b27713bfde16
-    last_write_checksum: sha1:0bacb39ed1c081afbee1064df8ed8ecf75843dc2
-    pristine_git_object: 969d8b0f5090a600354aff341017c8a239be671d
+    last_write_checksum: sha1:f972ad5bf80b337766203256dcb1d8cba46697f0
+    pristine_git_object: 993d3d9a96fa2af800ef9c8bf3eb19922a7b0acd
   src/mag3nt/ap2.py:
     id: 6e946cf8f562
     last_write_checksum: sha1:6b7eed8852b992012ce76cf46909615b21a200a0
@@ -920,8 +920,8 @@ trackedFiles:
     pristine_git_object: 91bdf0ac6fb0bbde4673d850b37e86608924efaf
   src/mag3nt/models/operations/paylinkscreate.py:
     id: 50818e4947f9
-    last_write_checksum: sha1:807154d1ed17b3f2c38348929c5e02477126cf04
-    pristine_git_object: 5c4205a0a8e065fb04d7d826e57f3aa3d96ebcfa
+    last_write_checksum: sha1:153d7c3628db6bcaad0573c662db017a6db06310
+    pristine_git_object: 1b64771092d4b9daeae257007689fad2eff221dc
   src/mag3nt/models/operations/paylinksget.py:
     id: 85758b748b53
     last_write_checksum: sha1:d05ba2ccc98da4ab7c9a0cfef00148874bdd0a0c
@@ -976,8 +976,8 @@ trackedFiles:
     pristine_git_object: 9e80942a7d38da7d23ce1fb41d0862a4d2b9afff
   src/mag3nt/pay_links.py:
     id: b9d3e648aa9b
-    last_write_checksum: sha1:1357dd3f0b3dfd161ac8336dae7801a991491a92
-    pristine_git_object: e30b95529e31a29024f3c19ddd0a1f417a1abfa5
+    last_write_checksum: sha1:3cbd0a323badecbef0baeec5c0da63ace71438b3
+    pristine_git_object: 3637eafce5121cd6083c4e012d0fabdc2ab50b05
   src/mag3nt/py.typed:
     id: 74c7c43aeba7
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
