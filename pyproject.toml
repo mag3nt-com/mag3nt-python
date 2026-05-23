@@ -1,6 +1,6 @@
 [project]
 name = "mag3nt"
-version = "0.1.4"
+version = "0.1.5"
 description = "Python SDK for the mag3nt API — payment infrastructure for AI agents"
 authors = [{ name = "Speakeasy" },]
 readme = "README.md"
@@ -19,13 +19,13 @@ dev = [
     "pyright ==1.1.398",
 ]
 
+dependencies = [
+]
+
 devDependencies = [
 ]
 
 peerDependencies = [
-]
-
-dependencies = [
 ]
 
 [tool.setuptools.packages.find]

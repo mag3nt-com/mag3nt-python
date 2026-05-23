@@ -5,7 +5,7 @@ from mag3nt import models, utils
 from mag3nt._hooks import HookContext
 from mag3nt.types import OptionalNullable, UNSET
 from mag3nt.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional, Union
 
 
 class PayLinks(BaseSDK):
@@ -22,6 +22,7 @@ class PayLinks(BaseSDK):
             ]
         ] = UNSET,
         memo: Optional[str] = None,
+        accepted_protocols: Optional[List[str]] = None,
         type_: Optional[models.operations.PayLinksCreateType] = "SINGLE",
         max_uses: Optional[int] = 1,
         expires_in: Optional[float] = None,
@@ -35,6 +36,7 @@ class PayLinks(BaseSDK):
         :param card_id:
         :param amount: Fixed amount (null for open-amount)
         :param memo:
+        :param accepted_protocols:
         :param type: SINGLE for one-time, RECURRING for multi-use
         :param max_uses:
         :param expires_in: Hours until expiry
@@ -57,6 +59,7 @@ class PayLinks(BaseSDK):
             card_id=card_id,
             amount=amount,
             memo=memo,
+            accepted_protocols=accepted_protocols,
             type=type_,
             max_uses=max_uses,
             expires_in=expires_in,
@@ -133,6 +136,7 @@ class PayLinks(BaseSDK):
             ]
         ] = UNSET,
         memo: Optional[str] = None,
+        accepted_protocols: Optional[List[str]] = None,
         type_: Optional[models.operations.PayLinksCreateType] = "SINGLE",
         max_uses: Optional[int] = 1,
         expires_in: Optional[float] = None,
@@ -146,6 +150,7 @@ class PayLinks(BaseSDK):
         :param card_id:
         :param amount: Fixed amount (null for open-amount)
         :param memo:
+        :param accepted_protocols:
         :param type: SINGLE for one-time, RECURRING for multi-use
         :param max_uses:
         :param expires_in: Hours until expiry
@@ -168,6 +173,7 @@ class PayLinks(BaseSDK):
             card_id=card_id,
             amount=amount,
             memo=memo,
+            accepted_protocols=accepted_protocols,
             type=type_,
             max_uses=max_uses,
             expires_in=expires_in,

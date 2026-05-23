@@ -3,7 +3,7 @@
 from __future__ import annotations
 from mag3nt.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Literal, Optional, Union
+from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
@@ -29,6 +29,7 @@ class PayLinksCreateRequestTypedDict(TypedDict):
     amount: NotRequired[Nullable[PayLinksCreateAmountTypedDict]]
     r"""Fixed amount (null for open-amount)"""
     memo: NotRequired[str]
+    accepted_protocols: NotRequired[List[str]]
     type: NotRequired[PayLinksCreateType]
     r"""SINGLE for one-time, RECURRING for multi-use"""
     max_uses: NotRequired[int]
@@ -44,6 +45,8 @@ class PayLinksCreateRequest(BaseModel):
 
     memo: Optional[str] = None
 
+    accepted_protocols: Optional[List[str]] = None
+
     type: Optional[PayLinksCreateType] = "SINGLE"
     r"""SINGLE for one-time, RECURRING for multi-use"""
 
@@ -54,7 +57,9 @@ class PayLinksCreateRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["amount", "memo", "type", "max_uses", "expires_in"])
+        optional_fields = set(
+            ["amount", "memo", "accepted_protocols", "type", "max_uses", "expires_in"]
+        )
         nullable_fields = set(["amount"])
         serialized = handler(self)
         m = {}
