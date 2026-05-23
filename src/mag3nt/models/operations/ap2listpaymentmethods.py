@@ -3,14 +3,20 @@
 from __future__ import annotations
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import List, Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+AvailableTypedDict = TypeAliasType("AvailableTypedDict", Union[float, str])
+
+
+Available = TypeAliasType("Available", Union[float, str])
 
 
 class MethodTypedDict(TypedDict):
     type: NotRequired[str]
     card_id: NotRequired[str]
-    available: NotRequired[float]
+    available: NotRequired[AvailableTypedDict]
 
 
 class Method(BaseModel):
@@ -18,7 +24,7 @@ class Method(BaseModel):
 
     card_id: Optional[str] = None
 
-    available: Optional[float] = None
+    available: Optional[Available] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

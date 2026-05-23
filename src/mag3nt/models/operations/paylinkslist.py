@@ -11,17 +11,17 @@ from typing_extensions import NotRequired, TypedDict
 class PayLinksListResponseTypedDict(TypedDict):
     r"""Pay links list"""
 
-    pay_links: NotRequired[List[components_paylink.PayLinkTypedDict]]
+    links: NotRequired[List[components_paylink.PayLinkTypedDict]]
 
 
 class PayLinksListResponse(BaseModel):
     r"""Pay links list"""
 
-    pay_links: Optional[List[components_paylink.PayLink]] = None
+    links: Optional[List[components_paylink.PayLink]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["pay_links"])
+        optional_fields = set(["links"])
         serialized = handler(self)
         m = {}
 

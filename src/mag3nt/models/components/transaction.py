@@ -5,7 +5,15 @@ from datetime import datetime
 from mag3nt.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
 from typing import Literal, Optional, Union
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+TransactionAmountTypedDict = TypeAliasType(
+    "TransactionAmountTypedDict", Union[float, str]
+)
+
+
+TransactionAmount = TypeAliasType("TransactionAmount", Union[float, str])
 
 
 Protocol = Union[
@@ -21,7 +29,7 @@ Protocol = Union[
 class TransactionTypedDict(TypedDict):
     id: NotRequired[str]
     card_id: NotRequired[str]
-    amount: NotRequired[float]
+    amount: NotRequired[TransactionAmountTypedDict]
     merchant: NotRequired[str]
     protocol: NotRequired[Protocol]
     status: NotRequired[str]
@@ -35,7 +43,7 @@ class Transaction(BaseModel):
 
     card_id: Optional[str] = None
 
-    amount: Optional[float] = None
+    amount: Optional[TransactionAmount] = None
 
     merchant: Optional[str] = None
 

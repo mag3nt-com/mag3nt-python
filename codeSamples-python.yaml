@@ -33,7 +33,7 @@ actions:
                 api_key_auth="<YOUR_API_KEY_HERE>",
             ) as m_client:
 
-                res = m_client.ap2.ap2_execute(card_id="<id>", card_token="<value>", amount=7776.54)
+                res = m_client.ap2.ap2_execute(card_id="<id>", card_token="<value>", amount="802.33")
 
                 # Handle response
                 print(res)
@@ -50,7 +50,7 @@ actions:
                 api_key_auth="<YOUR_API_KEY_HERE>",
             ) as m_client:
 
-                res = m_client.ap2.ap2_create_mandate(card_id="<id>", card_token="<value>", amount=173.14, merchant="<value>")
+                res = m_client.ap2.ap2_create_mandate(card_id="<id>", card_token="<value>", amount=1529.88, merchant="<value>")
 
                 # Handle response
                 print(res)
@@ -369,7 +369,7 @@ actions:
                 api_key_auth="<YOUR_API_KEY_HERE>",
             ) as m_client:
 
-                res = m_client.mpp.mpp_pay(card_id="<id>", card_token="<value>", amount=7359.99, network="eip155:8453")
+                res = m_client.mpp.mpp_pay(card_id="<id>", card_token="<value>", amount="345.29", network="eip155:8453")
 
                 # Handle response
                 print(res)
@@ -437,7 +437,7 @@ actions:
                 api_key_auth="<YOUR_API_KEY_HERE>",
             ) as m_client:
 
-                res = m_client.mpp.mpp_streams_open(card_id="<id>", card_token="<value>", budget=8538.9, tick_amount=1381.56)
+                res = m_client.mpp.mpp_streams_open(card_id="<id>", card_token="<value>", budget="<value>", tick_amount=1246.22)
 
                 # Handle response
                 print(res)

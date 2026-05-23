@@ -4,8 +4,8 @@ from __future__ import annotations
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from mag3nt.utils import FieldMetadata, QueryParamMetadata
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class X402DiscoverRequestTypedDict(TypedDict):
@@ -18,12 +18,20 @@ class X402DiscoverRequest(BaseModel):
     ]
 
 
+X402DiscoverAmountTypedDict = TypeAliasType(
+    "X402DiscoverAmountTypedDict", Union[float, str]
+)
+
+
+X402DiscoverAmount = TypeAliasType("X402DiscoverAmount", Union[float, str])
+
+
 class X402DiscoverResponseTypedDict(TypedDict):
     r"""Discovery result"""
 
     supports_x402: NotRequired[bool]
     payment_address: NotRequired[str]
-    amount: NotRequired[float]
+    amount: NotRequired[X402DiscoverAmountTypedDict]
     asset: NotRequired[str]
 
 
@@ -34,7 +42,7 @@ class X402DiscoverResponse(BaseModel):
 
     payment_address: Optional[str] = None
 
-    amount: Optional[float] = None
+    amount: Optional[X402DiscoverAmount] = None
 
     asset: Optional[str] = None
 

@@ -6,19 +6,29 @@ from mag3nt.types import BaseModel, UNSET_SENTINEL
 from mag3nt.utils import FieldMetadata, HeaderMetadata, RequestMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+CardsBulkCreateLimitAmountTypedDict = TypeAliasType(
+    "CardsBulkCreateLimitAmountTypedDict", Union[float, str]
+)
+
+
+CardsBulkCreateLimitAmount = TypeAliasType(
+    "CardsBulkCreateLimitAmount", Union[float, str]
+)
 
 
 class CardTypedDict(TypedDict):
     purpose: str
-    limit_amount: float
+    limit_amount: CardsBulkCreateLimitAmountTypedDict
 
 
 class Card(BaseModel):
     purpose: str
 
-    limit_amount: float
+    limit_amount: CardsBulkCreateLimitAmount
 
 
 class CardsBulkCreateRequestBodyTypedDict(TypedDict):
@@ -87,12 +97,18 @@ class CardsBulkCreateRequest(BaseModel):
         return m
 
 
+TotalAllocatedTypedDict = TypeAliasType("TotalAllocatedTypedDict", Union[float, str])
+
+
+TotalAllocated = TypeAliasType("TotalAllocated", Union[float, str])
+
+
 class CardsBulkCreateResponseTypedDict(TypedDict):
     r"""Cards created"""
 
     success: NotRequired[bool]
     cards: NotRequired[List[components_card.CardTypedDict]]
-    total_allocated: NotRequired[float]
+    total_allocated: NotRequired[TotalAllocatedTypedDict]
 
 
 class CardsBulkCreateResponse(BaseModel):
@@ -102,7 +118,7 @@ class CardsBulkCreateResponse(BaseModel):
 
     cards: Optional[List[components_card.Card]] = None
 
-    total_allocated: Optional[float] = None
+    total_allocated: Optional[TotalAllocated] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

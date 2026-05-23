@@ -8,10 +8,18 @@ from typing import Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
+PayLinksSettleAmountTypedDict = TypeAliasType(
+    "PayLinksSettleAmountTypedDict", Union[float, str]
+)
+
+
+PayLinksSettleAmount = TypeAliasType("PayLinksSettleAmount", Union[float, str])
+
+
 class RequestBody2TypedDict(TypedDict):
     tx_hash: NotRequired[str]
     from_address: NotRequired[str]
-    amount: NotRequired[float]
+    amount: NotRequired[PayLinksSettleAmountTypedDict]
 
 
 class RequestBody2(BaseModel):
@@ -19,7 +27,7 @@ class RequestBody2(BaseModel):
 
     from_address: Optional[str] = None
 
-    amount: Optional[float] = None
+    amount: Optional[PayLinksSettleAmount] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

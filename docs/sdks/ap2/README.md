@@ -103,7 +103,7 @@ with Mag3nt(
     api_key_auth="<YOUR_API_KEY_HERE>",
 ) as m_client:
 
-    res = m_client.ap2.ap2_create_mandate(card_id="<id>", card_token="<value>", amount=173.14, merchant="<value>")
+    res = m_client.ap2.ap2_create_mandate(card_id="<id>", card_token="<value>", amount=1529.88, merchant="<value>")
 
     # Handle response
     print(res)
@@ -112,15 +112,15 @@ with Mag3nt(
 
 ### Parameters
 
-| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `card_id`                                                            | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
-| `card_token`                                                         | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
-| `amount`                                                             | *float*                                                              | :heavy_check_mark:                                                   | N/A                                                                  |
-| `merchant`                                                           | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
-| `max_amount`                                                         | *Optional[float]*                                                    | :heavy_minus_sign:                                                   | N/A                                                                  |
-| `expires_at`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | N/A                                                                  |
-| `retries`                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)     | :heavy_minus_sign:                                                   | Configuration to override the default retry behavior of the client.  |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `card_id`                                                                              | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `card_token`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `amount`                                                                               | [operations.Ap2CreateMandateAmount](../../models/operations/ap2createmandateamount.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `merchant`                                                                             | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `max_amount`                                                                           | [Optional[operations.MaxAmount]](../../models/operations/maxamount.md)                 | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `expires_at`                                                                           | [date](https://docs.python.org/3/library/datetime.html#date-objects)                   | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
 
 ### Response
 
@@ -147,7 +147,7 @@ with Mag3nt(
     api_key_auth="<YOUR_API_KEY_HERE>",
 ) as m_client:
 
-    res = m_client.ap2.ap2_execute(card_id="<id>", card_token="<value>", amount=7776.54)
+    res = m_client.ap2.ap2_execute(card_id="<id>", card_token="<value>", amount="802.33")
 
     # Handle response
     print(res)
@@ -156,13 +156,13 @@ with Mag3nt(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `card_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `card_token`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `amount`                                                            | *float*                                                             | :heavy_check_mark:                                                  | N/A                                                                 |
-| `mandate_id`                                                        | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `card_id`                                                                  | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `card_token`                                                               | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `amount`                                                                   | [operations.Ap2ExecuteAmount](../../models/operations/ap2executeamount.md) | :heavy_check_mark:                                                         | N/A                                                                        |
+| `mandate_id`                                                               | *Optional[str]*                                                            | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `retries`                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)           | :heavy_minus_sign:                                                         | Configuration to override the default retry behavior of the client.        |
 
 ### Response
 

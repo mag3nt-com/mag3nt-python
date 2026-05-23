@@ -3,30 +3,62 @@
 from __future__ import annotations
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+TotalFundedTypedDict = TypeAliasType("TotalFundedTypedDict", Union[float, str])
+
+
+TotalFunded = TypeAliasType("TotalFunded", Union[float, str])
+
+
+TotalAllocatedTypedDict = TypeAliasType("TotalAllocatedTypedDict", Union[float, str])
+
+
+TotalAllocated = TypeAliasType("TotalAllocated", Union[float, str])
+
+
+TotalSpentTypedDict = TypeAliasType("TotalSpentTypedDict", Union[float, str])
+
+
+TotalSpent = TypeAliasType("TotalSpent", Union[float, str])
+
+
+TotalWithdrawnTypedDict = TypeAliasType("TotalWithdrawnTypedDict", Union[float, str])
+
+
+TotalWithdrawn = TypeAliasType("TotalWithdrawn", Union[float, str])
+
+
+BalanceAvailableTypedDict = TypeAliasType(
+    "BalanceAvailableTypedDict", Union[float, str]
+)
+
+
+BalanceAvailable = TypeAliasType("BalanceAvailable", Union[float, str])
 
 
 class BalanceTypedDict(TypedDict):
-    total_funded: NotRequired[float]
-    total_allocated: NotRequired[float]
-    total_spent: NotRequired[float]
-    total_withdrawn: NotRequired[float]
-    available: NotRequired[float]
+    total_funded: NotRequired[TotalFundedTypedDict]
+    total_allocated: NotRequired[TotalAllocatedTypedDict]
+    total_spent: NotRequired[TotalSpentTypedDict]
+    total_withdrawn: NotRequired[TotalWithdrawnTypedDict]
+    available: NotRequired[BalanceAvailableTypedDict]
     network: NotRequired[str]
     asset: NotRequired[str]
 
 
 class Balance(BaseModel):
-    total_funded: Optional[float] = None
+    total_funded: Optional[TotalFunded] = None
 
-    total_allocated: Optional[float] = None
+    total_allocated: Optional[TotalAllocated] = None
 
-    total_spent: Optional[float] = None
+    total_spent: Optional[TotalSpent] = None
 
-    total_withdrawn: Optional[float] = None
+    total_withdrawn: Optional[TotalWithdrawn] = None
 
-    available: Optional[float] = None
+    available: Optional[BalanceAvailable] = None
 
     network: Optional[str] = None
 

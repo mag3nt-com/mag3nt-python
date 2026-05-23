@@ -3,16 +3,34 @@
 from __future__ import annotations
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+BudgetRequestTypedDict = TypeAliasType("BudgetRequestTypedDict", Union[float, str])
+r"""Total budget for the stream in USDC"""
+
+
+BudgetRequest = TypeAliasType("BudgetRequest", Union[float, str])
+r"""Total budget for the stream in USDC"""
+
+
+TickAmountRequestTypedDict = TypeAliasType(
+    "TickAmountRequestTypedDict", Union[float, str]
+)
+r"""Amount per tick"""
+
+
+TickAmountRequest = TypeAliasType("TickAmountRequest", Union[float, str])
+r"""Amount per tick"""
 
 
 class MppStreamsOpenRequestTypedDict(TypedDict):
     card_id: str
     card_token: str
-    budget: float
+    budget: BudgetRequestTypedDict
     r"""Total budget for the stream in USDC"""
-    tick_amount: float
+    tick_amount: TickAmountRequestTypedDict
     r"""Amount per tick"""
     receiver_card_id: NotRequired[str]
 
@@ -22,10 +40,10 @@ class MppStreamsOpenRequest(BaseModel):
 
     card_token: str
 
-    budget: float
+    budget: BudgetRequest
     r"""Total budget for the stream in USDC"""
 
-    tick_amount: float
+    tick_amount: TickAmountRequest
     r"""Amount per tick"""
 
     receiver_card_id: Optional[str] = None
@@ -47,14 +65,44 @@ class MppStreamsOpenRequest(BaseModel):
         return m
 
 
+MppStreamsOpenBudgetResponseTypedDict = TypeAliasType(
+    "MppStreamsOpenBudgetResponseTypedDict", Union[float, str]
+)
+
+
+MppStreamsOpenBudgetResponse = TypeAliasType(
+    "MppStreamsOpenBudgetResponse", Union[float, str]
+)
+
+
+MppStreamsOpenTickAmountResponseTypedDict = TypeAliasType(
+    "MppStreamsOpenTickAmountResponseTypedDict", Union[float, str]
+)
+
+
+MppStreamsOpenTickAmountResponse = TypeAliasType(
+    "MppStreamsOpenTickAmountResponse", Union[float, str]
+)
+
+
+MppStreamsOpenTotalTickedTypedDict = TypeAliasType(
+    "MppStreamsOpenTotalTickedTypedDict", Union[float, str]
+)
+
+
+MppStreamsOpenTotalTicked = TypeAliasType(
+    "MppStreamsOpenTotalTicked", Union[float, str]
+)
+
+
 class MppStreamsOpenResponseTypedDict(TypedDict):
     r"""Stream opened"""
 
     id: NotRequired[str]
     card_id: NotRequired[str]
-    budget: NotRequired[float]
-    tick_amount: NotRequired[float]
-    total_ticked: NotRequired[float]
+    budget: NotRequired[MppStreamsOpenBudgetResponseTypedDict]
+    tick_amount: NotRequired[MppStreamsOpenTickAmountResponseTypedDict]
+    total_ticked: NotRequired[MppStreamsOpenTotalTickedTypedDict]
     status: NotRequired[str]
     receiver_card_id: NotRequired[str]
 
@@ -66,11 +114,11 @@ class MppStreamsOpenResponse(BaseModel):
 
     card_id: Optional[str] = None
 
-    budget: Optional[float] = None
+    budget: Optional[MppStreamsOpenBudgetResponse] = None
 
-    tick_amount: Optional[float] = None
+    tick_amount: Optional[MppStreamsOpenTickAmountResponse] = None
 
-    total_ticked: Optional[float] = None
+    total_ticked: Optional[MppStreamsOpenTotalTicked] = None
 
     status: Optional[str] = None
 

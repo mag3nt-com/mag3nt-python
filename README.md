@@ -352,7 +352,7 @@ with Mag3nt(
 **Primary error:**
 * [`Mag3ntError`](./src/mag3nt/models/errors/mag3nterror.py): The base class for HTTP error responses.
 
-<details><summary>Less common errors (7)</summary>
+<details><summary>Less common errors (8)</summary>
 
 <br />
 
@@ -363,8 +363,9 @@ with Mag3nt(
 
 
 **Inherit from [`Mag3ntError`](./src/mag3nt/models/errors/mag3nterror.py)**:
-* [`Error`](./src/mag3nt/models/errors/error.py): Applicable to 3 of 41 methods.*
+* [`Error`](./src/mag3nt/models/errors/error.py): Applicable to 4 of 41 methods.*
 * [`BalanceError`](./src/mag3nt/models/errors/balanceerror.py): Insufficient balance. Status code `403`. Applicable to 2 of 41 methods.*
+* [`GoneError`](./src/mag3nt/models/errors/goneerror.py): Pay link has been used. Status code `410`. Applicable to 1 of 41 methods.*
 * [`ResponseValidationError`](./src/mag3nt/models/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

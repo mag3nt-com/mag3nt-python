@@ -3,8 +3,8 @@
 from __future__ import annotations
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 class MppStreamsCloseRequestTypedDict(TypedDict):
@@ -15,17 +15,23 @@ class MppStreamsCloseRequest(BaseModel):
     stream_id: str
 
 
+FinalAmountTypedDict = TypeAliasType("FinalAmountTypedDict", Union[float, str])
+
+
+FinalAmount = TypeAliasType("FinalAmount", Union[float, str])
+
+
 class MppStreamsCloseResponseTypedDict(TypedDict):
     r"""Stream closed"""
 
-    final_amount: NotRequired[float]
+    final_amount: NotRequired[FinalAmountTypedDict]
     status: NotRequired[str]
 
 
 class MppStreamsCloseResponse(BaseModel):
     r"""Stream closed"""
 
-    final_amount: Optional[float] = None
+    final_amount: Optional[FinalAmount] = None
 
     status: Optional[str] = None
 
