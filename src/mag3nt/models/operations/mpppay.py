@@ -3,14 +3,20 @@
 from __future__ import annotations
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+MppPayAmountTypedDict = TypeAliasType("MppPayAmountTypedDict", Union[float, str])
+
+
+MppPayAmount = TypeAliasType("MppPayAmount", Union[float, str])
 
 
 class MppPayRequestTypedDict(TypedDict):
     card_id: str
     card_token: str
-    amount: float
+    amount: MppPayAmountTypedDict
     merchant: NotRequired[str]
     merchant_address: NotRequired[str]
     network: NotRequired[str]
@@ -21,7 +27,7 @@ class MppPayRequest(BaseModel):
 
     card_token: str
 
-    amount: float
+    amount: MppPayAmount
 
     merchant: Optional[str] = None
 

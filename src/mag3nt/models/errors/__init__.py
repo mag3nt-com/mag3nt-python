@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from .error import Error, ErrorData
     from .mag3ntdefaulterror import Mag3ntDefaultError
     from .no_response_error import NoResponseError
+    from .paylinksgetstatus import GoneError, GoneErrorData
     from .responsevalidationerror import ResponseValidationError
 
 __all__ = [
@@ -17,6 +18,8 @@ __all__ = [
     "BalanceErrorData",
     "Error",
     "ErrorData",
+    "GoneError",
+    "GoneErrorData",
     "Mag3ntDefaultError",
     "Mag3ntError",
     "NoResponseError",
@@ -30,6 +33,8 @@ _dynamic_imports: dict[str, str] = {
     "ErrorData": ".error",
     "Mag3ntDefaultError": ".mag3ntdefaulterror",
     "NoResponseError": ".no_response_error",
+    "GoneError": ".paylinksgetstatus",
+    "GoneErrorData": ".paylinksgetstatus",
     "ResponseValidationError": ".responsevalidationerror",
 }
 

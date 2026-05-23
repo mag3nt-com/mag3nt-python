@@ -4,8 +4,8 @@ from __future__ import annotations
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from mag3nt.utils import FieldMetadata, PathParamMetadata
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class MppStreamsGetRequestTypedDict(TypedDict):
@@ -18,14 +18,38 @@ class MppStreamsGetRequest(BaseModel):
     ]
 
 
+MppStreamsGetBudgetTypedDict = TypeAliasType(
+    "MppStreamsGetBudgetTypedDict", Union[float, str]
+)
+
+
+MppStreamsGetBudget = TypeAliasType("MppStreamsGetBudget", Union[float, str])
+
+
+MppStreamsGetTickAmountTypedDict = TypeAliasType(
+    "MppStreamsGetTickAmountTypedDict", Union[float, str]
+)
+
+
+MppStreamsGetTickAmount = TypeAliasType("MppStreamsGetTickAmount", Union[float, str])
+
+
+MppStreamsGetTotalTickedTypedDict = TypeAliasType(
+    "MppStreamsGetTotalTickedTypedDict", Union[float, str]
+)
+
+
+MppStreamsGetTotalTicked = TypeAliasType("MppStreamsGetTotalTicked", Union[float, str])
+
+
 class MppStreamsGetResponseTypedDict(TypedDict):
     r"""Stream details"""
 
     id: NotRequired[str]
     card_id: NotRequired[str]
-    budget: NotRequired[float]
-    tick_amount: NotRequired[float]
-    total_ticked: NotRequired[float]
+    budget: NotRequired[MppStreamsGetBudgetTypedDict]
+    tick_amount: NotRequired[MppStreamsGetTickAmountTypedDict]
+    total_ticked: NotRequired[MppStreamsGetTotalTickedTypedDict]
     status: NotRequired[str]
 
 
@@ -36,11 +60,11 @@ class MppStreamsGetResponse(BaseModel):
 
     card_id: Optional[str] = None
 
-    budget: Optional[float] = None
+    budget: Optional[MppStreamsGetBudget] = None
 
-    tick_amount: Optional[float] = None
+    tick_amount: Optional[MppStreamsGetTickAmount] = None
 
-    total_ticked: Optional[float] = None
+    total_ticked: Optional[MppStreamsGetTotalTicked] = None
 
     status: Optional[str] = None
 

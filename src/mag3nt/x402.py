@@ -16,7 +16,10 @@ class X402(BaseSDK):
         *,
         card_id: str,
         card_token: str,
-        amount: float,
+        amount: Union[
+            models.operations.X402PayAmountRequest,
+            models.operations.X402PayAmountRequestTypedDict,
+        ],
         merchant: Optional[str] = None,
         merchant_address: Optional[str] = None,
         mcc: Optional[str] = None,
@@ -140,7 +143,10 @@ class X402(BaseSDK):
         *,
         card_id: str,
         card_token: str,
-        amount: float,
+        amount: Union[
+            models.operations.X402PayAmountRequest,
+            models.operations.X402PayAmountRequestTypedDict,
+        ],
         merchant: Optional[str] = None,
         merchant_address: Optional[str] = None,
         mcc: Optional[str] = None,

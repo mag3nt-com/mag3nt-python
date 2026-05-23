@@ -3,8 +3,8 @@
 from __future__ import annotations
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 class MppStreamsTickRequestTypedDict(TypedDict):
@@ -21,19 +21,35 @@ class MppStreamsTickRequest(BaseModel):
     card_token: str
 
 
+MppStreamsTickTotalTickedTypedDict = TypeAliasType(
+    "MppStreamsTickTotalTickedTypedDict", Union[float, str]
+)
+
+
+MppStreamsTickTotalTicked = TypeAliasType(
+    "MppStreamsTickTotalTicked", Union[float, str]
+)
+
+
+RemainingTypedDict = TypeAliasType("RemainingTypedDict", Union[float, str])
+
+
+Remaining = TypeAliasType("Remaining", Union[float, str])
+
+
 class MppStreamsTickResponseTypedDict(TypedDict):
     r"""Tick processed"""
 
-    total_ticked: NotRequired[float]
-    remaining: NotRequired[float]
+    total_ticked: NotRequired[MppStreamsTickTotalTickedTypedDict]
+    remaining: NotRequired[RemainingTypedDict]
 
 
 class MppStreamsTickResponse(BaseModel):
     r"""Tick processed"""
 
-    total_ticked: Optional[float] = None
+    total_ticked: Optional[MppStreamsTickTotalTicked] = None
 
-    remaining: Optional[float] = None
+    remaining: Optional[Remaining] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

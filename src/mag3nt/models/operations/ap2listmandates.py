@@ -4,8 +4,8 @@ from __future__ import annotations
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from mag3nt.utils import FieldMetadata, PathParamMetadata
 from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class Ap2ListMandatesRequestTypedDict(TypedDict):
@@ -18,10 +18,18 @@ class Ap2ListMandatesRequest(BaseModel):
     ]
 
 
+Ap2ListMandatesAmountTypedDict = TypeAliasType(
+    "Ap2ListMandatesAmountTypedDict", Union[float, str]
+)
+
+
+Ap2ListMandatesAmount = TypeAliasType("Ap2ListMandatesAmount", Union[float, str])
+
+
 class MandateTypedDict(TypedDict):
     mandate_id: NotRequired[str]
     merchant: NotRequired[str]
-    amount: NotRequired[float]
+    amount: NotRequired[Ap2ListMandatesAmountTypedDict]
     status: NotRequired[str]
 
 
@@ -30,7 +38,7 @@ class Mandate(BaseModel):
 
     merchant: Optional[str] = None
 
-    amount: Optional[float] = None
+    amount: Optional[Ap2ListMandatesAmount] = None
 
     status: Optional[str] = None
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
+from mag3nt.models.components import balanceerror as components_balanceerror
 from mag3nt.models.errors import Mag3ntError
 from mag3nt.types import BaseModel
 from typing import Optional
@@ -10,8 +11,8 @@ from typing import Optional
 
 class BalanceErrorData(BaseModel):
     error: str
-    available: float
-    requested: float
+    available: components_balanceerror.BalanceErrorAvailable
+    requested: components_balanceerror.Requested
     network: Optional[str] = None
     asset: Optional[str] = None
 

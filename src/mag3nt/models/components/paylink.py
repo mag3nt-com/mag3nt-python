@@ -12,7 +12,13 @@ from mag3nt.types import (
 )
 from pydantic import model_serializer
 from typing import Literal, Optional, Union
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+PayLinkAmountTypedDict = TypeAliasType("PayLinkAmountTypedDict", Union[str, float])
+
+
+PayLinkAmount = TypeAliasType("PayLinkAmount", Union[str, float])
 
 
 PayLinkStatus = Union[
@@ -29,7 +35,7 @@ class PayLinkTypedDict(TypedDict):
     id: NotRequired[str]
     code: NotRequired[str]
     url: NotRequired[str]
-    amount: NotRequired[Nullable[float]]
+    amount: NotRequired[Nullable[PayLinkAmountTypedDict]]
     asset: NotRequired[str]
     network: NotRequired[str]
     memo: NotRequired[str]
@@ -47,7 +53,7 @@ class PayLink(BaseModel):
 
     url: Optional[str] = None
 
-    amount: OptionalNullable[float] = UNSET
+    amount: OptionalNullable[PayLinkAmount] = UNSET
 
     asset: Optional[str] = None
 

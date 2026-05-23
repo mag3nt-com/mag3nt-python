@@ -30,7 +30,7 @@ with Mag3nt(
     api_key_auth="<YOUR_API_KEY_HERE>",
 ) as m_client:
 
-    res = m_client.mpp.mpp_pay(card_id="<id>", card_token="<value>", amount=7359.99, network="eip155:8453")
+    res = m_client.mpp.mpp_pay(card_id="<id>", card_token="<value>", amount="345.29", network="eip155:8453")
 
     # Handle response
     print(res)
@@ -43,7 +43,7 @@ with Mag3nt(
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `card_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `card_token`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `amount`                                                            | *float*                                                             | :heavy_check_mark:                                                  | N/A                                                                 |
+| `amount`                                                            | [operations.MppPayAmount](../../models/operations/mpppayamount.md)  | :heavy_check_mark:                                                  | N/A                                                                 |
 | `merchant`                                                          | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
 | `merchant_address`                                                  | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
 | `network`                                                           | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
@@ -193,7 +193,7 @@ with Mag3nt(
     api_key_auth="<YOUR_API_KEY_HERE>",
 ) as m_client:
 
-    res = m_client.mpp.mpp_streams_open(card_id="<id>", card_token="<value>", budget=8538.9, tick_amount=1381.56)
+    res = m_client.mpp.mpp_streams_open(card_id="<id>", card_token="<value>", budget="<value>", tick_amount=1246.22)
 
     # Handle response
     print(res)
@@ -202,14 +202,14 @@ with Mag3nt(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `card_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `card_token`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `budget`                                                            | *float*                                                             | :heavy_check_mark:                                                  | Total budget for the stream in USDC                                 |
-| `tick_amount`                                                       | *float*                                                             | :heavy_check_mark:                                                  | Amount per tick                                                     |
-| `receiver_card_id`                                                  | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `card_id`                                                                    | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `card_token`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `budget`                                                                     | [operations.BudgetRequest](../../models/operations/budgetrequest.md)         | :heavy_check_mark:                                                           | Total budget for the stream in USDC                                          |
+| `tick_amount`                                                                | [operations.TickAmountRequest](../../models/operations/tickamountrequest.md) | :heavy_check_mark:                                                           | Amount per tick                                                              |
+| `receiver_card_id`                                                           | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `retries`                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)             | :heavy_minus_sign:                                                           | Configuration to override the default retry behavior of the client.          |
 
 ### Response
 

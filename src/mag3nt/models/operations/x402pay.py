@@ -13,7 +13,17 @@ from mag3nt.types import (
 )
 from pydantic import model_serializer
 from typing import Literal, Optional, Union
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+X402PayAmountRequestTypedDict = TypeAliasType(
+    "X402PayAmountRequestTypedDict", Union[float, str]
+)
+r"""Payment amount in USDC"""
+
+
+X402PayAmountRequest = TypeAliasType("X402PayAmountRequest", Union[float, str])
+r"""Payment amount in USDC"""
 
 
 class X402PayRequestTypedDict(TypedDict):
@@ -21,7 +31,7 @@ class X402PayRequestTypedDict(TypedDict):
     r"""Card identifier (sx_...)"""
     card_token: str
     r"""Card secret token (tok_...)"""
-    amount: float
+    amount: X402PayAmountRequestTypedDict
     r"""Payment amount in USDC"""
     merchant: NotRequired[str]
     r"""Merchant identifier"""
@@ -41,7 +51,7 @@ class X402PayRequest(BaseModel):
     card_token: str
     r"""Card secret token (tok_...)"""
 
-    amount: float
+    amount: X402PayAmountRequest
     r"""Payment amount in USDC"""
 
     merchant: Optional[str] = None
@@ -77,6 +87,14 @@ class X402PayRequest(BaseModel):
         return m
 
 
+X402PayAmountResponseTypedDict = TypeAliasType(
+    "X402PayAmountResponseTypedDict", Union[float, str]
+)
+
+
+X402PayAmountResponse = TypeAliasType("X402PayAmountResponse", Union[float, str])
+
+
 Environment = Union[
     Literal[
         "sandbox",
@@ -93,7 +111,7 @@ class X402PayResponseTypedDict(TypedDict):
     success: NotRequired[bool]
     transaction_id: NotRequired[str]
     card_id: NotRequired[str]
-    amount: NotRequired[float]
+    amount: NotRequired[X402PayAmountResponseTypedDict]
     network: NotRequired[str]
     environment: NotRequired[Environment]
     r"""'sandbox' for testnet networks (e.g. eip155:84532), 'production' for mainnet. Sandbox transactions deduct balance but are never settled on-chain."""
@@ -112,7 +130,7 @@ class X402PayResponse(BaseModel):
 
     card_id: Optional[str] = None
 
-    amount: Optional[float] = None
+    amount: Optional[X402PayAmountResponse] = None
 
     network: Optional[str] = None
 

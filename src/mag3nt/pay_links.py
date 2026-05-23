@@ -5,7 +5,7 @@ from mag3nt import models, utils
 from mag3nt._hooks import HookContext
 from mag3nt.types import OptionalNullable, UNSET
 from mag3nt.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Mapping, Optional, Union
+from typing import Any, Mapping, Optional, Union
 
 
 class PayLinks(BaseSDK):
@@ -15,7 +15,12 @@ class PayLinks(BaseSDK):
         self,
         *,
         card_id: str,
-        amount: OptionalNullable[float] = UNSET,
+        amount: OptionalNullable[
+            Union[
+                models.operations.PayLinksCreateAmount,
+                models.operations.PayLinksCreateAmountTypedDict,
+            ]
+        ] = UNSET,
         memo: Optional[str] = None,
         type_: Optional[models.operations.PayLinksCreateType] = "SINGLE",
         max_uses: Optional[int] = 1,
@@ -24,7 +29,7 @@ class PayLinks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.operations.PayLinksCreateResponse:
+    ) -> models.components.PayLink:
         r"""Create a shareable payment link
 
         :param card_id:
@@ -103,9 +108,7 @@ class PayLinks(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.operations.PayLinksCreateResponse, http_res
-            )
+            return unmarshal_json_response(models.components.PayLink, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.errors.Mag3ntDefaultError(
@@ -123,7 +126,12 @@ class PayLinks(BaseSDK):
         self,
         *,
         card_id: str,
-        amount: OptionalNullable[float] = UNSET,
+        amount: OptionalNullable[
+            Union[
+                models.operations.PayLinksCreateAmount,
+                models.operations.PayLinksCreateAmountTypedDict,
+            ]
+        ] = UNSET,
         memo: Optional[str] = None,
         type_: Optional[models.operations.PayLinksCreateType] = "SINGLE",
         max_uses: Optional[int] = 1,
@@ -132,7 +140,7 @@ class PayLinks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.operations.PayLinksCreateResponse:
+    ) -> models.components.PayLink:
         r"""Create a shareable payment link
 
         :param card_id:
@@ -211,9 +219,7 @@ class PayLinks(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.operations.PayLinksCreateResponse, http_res
-            )
+            return unmarshal_json_response(models.components.PayLink, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.errors.Mag3ntDefaultError(
@@ -819,10 +825,19 @@ class PayLinks(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
                 models.operations.PayLinksGetStatusResponse, http_res
             )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(models.errors.ErrorData, http_res)
+            raise models.errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                models.errors.GoneErrorData, http_res
+            )
+            raise models.errors.GoneError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.errors.Mag3ntDefaultError(
@@ -908,10 +923,19 @@ class PayLinks(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
                 models.operations.PayLinksGetStatusResponse, http_res
             )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(models.errors.ErrorData, http_res)
+            raise models.errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                models.errors.GoneErrorData, http_res
+            )
+            raise models.errors.GoneError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.errors.Mag3ntDefaultError(

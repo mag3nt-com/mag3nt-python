@@ -189,7 +189,10 @@ class Cards(BaseSDK):
         self,
         *,
         purpose: str,
-        limit_amount: float,
+        limit_amount: Union[
+            models.operations.CardsCreateLimitAmount,
+            models.operations.CardsCreateLimitAmountTypedDict,
+        ],
         network: Optional[str] = "eip155:8453",
         asset: Optional[str] = "USDC",
         tx_hash: Optional[str] = None,
@@ -315,7 +318,10 @@ class Cards(BaseSDK):
         self,
         *,
         purpose: str,
-        limit_amount: float,
+        limit_amount: Union[
+            models.operations.CardsCreateLimitAmount,
+            models.operations.CardsCreateLimitAmountTypedDict,
+        ],
         network: Optional[str] = "eip155:8453",
         asset: Optional[str] = "USDC",
         tx_hash: Optional[str] = None,

@@ -4,14 +4,24 @@ from __future__ import annotations
 from mag3nt.models.components import card as components_card
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+CardsCreateLimitAmountTypedDict = TypeAliasType(
+    "CardsCreateLimitAmountTypedDict", Union[float, str]
+)
+r"""Maximum spend in USDC"""
+
+
+CardsCreateLimitAmount = TypeAliasType("CardsCreateLimitAmount", Union[float, str])
+r"""Maximum spend in USDC"""
 
 
 class CardsCreateRequestTypedDict(TypedDict):
     purpose: str
     r"""Human-readable label for the card"""
-    limit_amount: float
+    limit_amount: CardsCreateLimitAmountTypedDict
     r"""Maximum spend in USDC"""
     network: NotRequired[str]
     asset: NotRequired[str]
@@ -28,7 +38,7 @@ class CardsCreateRequest(BaseModel):
     purpose: str
     r"""Human-readable label for the card"""
 
-    limit_amount: float
+    limit_amount: CardsCreateLimitAmount
     r"""Maximum spend in USDC"""
 
     network: Optional[str] = "eip155:8453"

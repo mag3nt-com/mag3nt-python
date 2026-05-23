@@ -3,14 +3,22 @@
 from __future__ import annotations
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+Ap2ExecuteAmountTypedDict = TypeAliasType(
+    "Ap2ExecuteAmountTypedDict", Union[float, str]
+)
+
+
+Ap2ExecuteAmount = TypeAliasType("Ap2ExecuteAmount", Union[float, str])
 
 
 class Ap2ExecuteRequestTypedDict(TypedDict):
     card_id: str
     card_token: str
-    amount: float
+    amount: Ap2ExecuteAmountTypedDict
     mandate_id: NotRequired[str]
 
 
@@ -19,7 +27,7 @@ class Ap2ExecuteRequest(BaseModel):
 
     card_token: str
 
-    amount: float
+    amount: Ap2ExecuteAmount
 
     mandate_id: Optional[str] = None
 

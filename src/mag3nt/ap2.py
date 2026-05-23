@@ -6,7 +6,7 @@ from mag3nt import models, utils
 from mag3nt._hooks import HookContext
 from mag3nt.types import OptionalNullable, UNSET
 from mag3nt.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Mapping, Optional
+from typing import Mapping, Optional, Union
 
 
 class Ap2(BaseSDK):
@@ -349,9 +349,14 @@ class Ap2(BaseSDK):
         *,
         card_id: str,
         card_token: str,
-        amount: float,
+        amount: Union[
+            models.operations.Ap2CreateMandateAmount,
+            models.operations.Ap2CreateMandateAmountTypedDict,
+        ],
         merchant: str,
-        max_amount: Optional[float] = None,
+        max_amount: Optional[
+            Union[models.operations.MaxAmount, models.operations.MaxAmountTypedDict]
+        ] = None,
         expires_at: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -457,9 +462,14 @@ class Ap2(BaseSDK):
         *,
         card_id: str,
         card_token: str,
-        amount: float,
+        amount: Union[
+            models.operations.Ap2CreateMandateAmount,
+            models.operations.Ap2CreateMandateAmountTypedDict,
+        ],
         merchant: str,
-        max_amount: Optional[float] = None,
+        max_amount: Optional[
+            Union[models.operations.MaxAmount, models.operations.MaxAmountTypedDict]
+        ] = None,
         expires_at: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -565,7 +575,10 @@ class Ap2(BaseSDK):
         *,
         card_id: str,
         card_token: str,
-        amount: float,
+        amount: Union[
+            models.operations.Ap2ExecuteAmount,
+            models.operations.Ap2ExecuteAmountTypedDict,
+        ],
         mandate_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -667,7 +680,10 @@ class Ap2(BaseSDK):
         *,
         card_id: str,
         card_token: str,
-        amount: float,
+        amount: Union[
+            models.operations.Ap2ExecuteAmount,
+            models.operations.Ap2ExecuteAmountTypedDict,
+        ],
         mandate_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,

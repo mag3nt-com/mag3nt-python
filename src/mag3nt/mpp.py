@@ -16,7 +16,9 @@ class Mpp(BaseSDK):
         *,
         card_id: str,
         card_token: str,
-        amount: float,
+        amount: Union[
+            models.operations.MppPayAmount, models.operations.MppPayAmountTypedDict
+        ],
         merchant: Optional[str] = None,
         merchant_address: Optional[str] = None,
         network: Optional[str] = "eip155:8453",
@@ -122,7 +124,9 @@ class Mpp(BaseSDK):
         *,
         card_id: str,
         card_token: str,
-        amount: float,
+        amount: Union[
+            models.operations.MppPayAmount, models.operations.MppPayAmountTypedDict
+        ],
         merchant: Optional[str] = None,
         merchant_address: Optional[str] = None,
         network: Optional[str] = "eip155:8453",
@@ -800,8 +804,13 @@ class Mpp(BaseSDK):
         *,
         card_id: str,
         card_token: str,
-        budget: float,
-        tick_amount: float,
+        budget: Union[
+            models.operations.BudgetRequest, models.operations.BudgetRequestTypedDict
+        ],
+        tick_amount: Union[
+            models.operations.TickAmountRequest,
+            models.operations.TickAmountRequestTypedDict,
+        ],
         receiver_card_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -905,8 +914,13 @@ class Mpp(BaseSDK):
         *,
         card_id: str,
         card_token: str,
-        budget: float,
-        tick_amount: float,
+        budget: Union[
+            models.operations.BudgetRequest, models.operations.BudgetRequestTypedDict
+        ],
+        tick_amount: Union[
+            models.operations.TickAmountRequest,
+            models.operations.TickAmountRequestTypedDict,
+        ],
         receiver_card_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,

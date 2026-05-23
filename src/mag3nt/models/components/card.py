@@ -13,7 +13,13 @@ from mag3nt.types import (
 )
 from pydantic import model_serializer
 from typing import Literal, Optional, Union
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+LimitAmountTypedDict = TypeAliasType("LimitAmountTypedDict", Union[float, str])
+
+
+LimitAmount = TypeAliasType("LimitAmount", Union[float, str])
 
 
 CardStatus = Union[
@@ -38,11 +44,23 @@ SingleUse = Union[
 ]
 
 
+BalanceUnionTypedDict = TypeAliasType("BalanceUnionTypedDict", Union[float, str])
+
+
+BalanceUnion = TypeAliasType("BalanceUnion", Union[float, str])
+
+
+RemainingTypedDict = TypeAliasType("RemainingTypedDict", Union[float, str])
+
+
+Remaining = TypeAliasType("Remaining", Union[float, str])
+
+
 class CardTypedDict(TypedDict):
     id: NotRequired[str]
     token: NotRequired[str]
     purpose: NotRequired[str]
-    limit_amount: NotRequired[float]
+    limit_amount: NotRequired[LimitAmountTypedDict]
     status: NotRequired[CardStatus]
     mcc_locks: NotRequired[str]
     single_use: NotRequired[SingleUse]
@@ -50,8 +68,8 @@ class CardTypedDict(TypedDict):
     funding_network: NotRequired[str]
     funding_asset: NotRequired[str]
     wallet_address: NotRequired[str]
-    balance: NotRequired[float]
-    remaining: NotRequired[float]
+    balance: NotRequired[BalanceUnionTypedDict]
+    remaining: NotRequired[RemainingTypedDict]
     created_at: NotRequired[datetime]
 
 
@@ -62,7 +80,7 @@ class Card(BaseModel):
 
     purpose: Optional[str] = None
 
-    limit_amount: Optional[float] = None
+    limit_amount: Optional[LimitAmount] = None
 
     status: Optional[CardStatus] = None
 
@@ -78,9 +96,9 @@ class Card(BaseModel):
 
     wallet_address: Optional[str] = None
 
-    balance: Optional[float] = None
+    balance: Optional[BalanceUnion] = None
 
-    remaining: Optional[float] = None
+    remaining: Optional[Remaining] = None
 
     created_at: Optional[datetime] = None
 

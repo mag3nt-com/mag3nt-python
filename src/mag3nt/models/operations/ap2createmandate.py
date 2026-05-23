@@ -4,16 +4,30 @@ from __future__ import annotations
 from datetime import datetime
 from mag3nt.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+Ap2CreateMandateAmountTypedDict = TypeAliasType(
+    "Ap2CreateMandateAmountTypedDict", Union[float, str]
+)
+
+
+Ap2CreateMandateAmount = TypeAliasType("Ap2CreateMandateAmount", Union[float, str])
+
+
+MaxAmountTypedDict = TypeAliasType("MaxAmountTypedDict", Union[float, str])
+
+
+MaxAmount = TypeAliasType("MaxAmount", Union[float, str])
 
 
 class Ap2CreateMandateRequestTypedDict(TypedDict):
     card_id: str
     card_token: str
-    amount: float
+    amount: Ap2CreateMandateAmountTypedDict
     merchant: str
-    max_amount: NotRequired[float]
+    max_amount: NotRequired[MaxAmountTypedDict]
     expires_at: NotRequired[datetime]
 
 
@@ -22,11 +36,11 @@ class Ap2CreateMandateRequest(BaseModel):
 
     card_token: str
 
-    amount: float
+    amount: Ap2CreateMandateAmount
 
     merchant: str
 
-    max_amount: Optional[float] = None
+    max_amount: Optional[MaxAmount] = None
 
     expires_at: Optional[datetime] = None
 
@@ -47,11 +61,23 @@ class Ap2CreateMandateRequest(BaseModel):
         return m
 
 
+class ContentsTypedDict(TypedDict):
+    pass
+
+
+class Contents(BaseModel):
+    pass
+
+
 class Ap2CreateMandateResponseTypedDict(TypedDict):
     r"""Mandate created"""
 
     mandate_id: NotRequired[str]
-    status: NotRequired[str]
+    type: NotRequired[str]
+    contents: NotRequired[ContentsTypedDict]
+    merchant_signature: NotRequired[str]
+    ttl: NotRequired[str]
+    protocol: NotRequired[str]
 
 
 class Ap2CreateMandateResponse(BaseModel):
@@ -59,11 +85,21 @@ class Ap2CreateMandateResponse(BaseModel):
 
     mandate_id: Optional[str] = None
 
-    status: Optional[str] = None
+    type: Optional[str] = None
+
+    contents: Optional[Contents] = None
+
+    merchant_signature: Optional[str] = None
+
+    ttl: Optional[str] = None
+
+    protocol: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["mandate_id", "status"])
+        optional_fields = set(
+            ["mandate_id", "type", "contents", "merchant_signature", "ttl", "protocol"]
+        )
         serialized = handler(self)
         m = {}
 
