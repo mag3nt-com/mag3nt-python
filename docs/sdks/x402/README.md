@@ -6,14 +6,16 @@ HTTP 402 payment protocol
 
 ### Available Operations
 
-* [x402_pay](#x402_pay) - Pay for a service via x402 protocol
+* [~~x402_pay~~](#x402_pay) - (Removed) Pay for a service via x402 protocol :warning: **Deprecated**
 * [x402_discover](#x402_discover) - Discover x402 payment requirements for a URL
 * [x402_receive](#x402_receive) - Verify and accept an x402 payment
 
-## x402_pay
+## ~~x402_pay~~
 
-Authorizes a payment against a funded card. The card must be ACTIVE with sufficient allocation. Returns payment headers the agent can attach to retry the original 402 request.
+This proprietary push endpoint has been removed. Use POST /api/pay with { card_id, card_token, url } instead. It automatically detects x402 and settles on-chain.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -26,36 +28,23 @@ with Mag3nt(
     api_key_auth="<YOUR_API_KEY_HERE>",
 ) as m_client:
 
-    res = m_client.x402.x402_pay(card_id="sx_a66a6666-...", card_token="tok_3b9fe670-...", amount=0.5, merchant="weather-api.com", merchant_address="0xABC...", network="eip155:8453")
+    m_client.x402.x402_pay()
 
-    # Handle response
-    print(res)
+    # Use the SDK ...
 
 ```
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        | Example                                                                            |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `card_id`                                                                          | *str*                                                                              | :heavy_check_mark:                                                                 | Card identifier (sx_...)                                                           | sx_a66a6666-1234-5678-9abc-def012345678                                            |
-| `card_token`                                                                       | *str*                                                                              | :heavy_check_mark:                                                                 | Card secret token (tok_...)                                                        | tok_3b9fe670-abcd-efgh-ijkl-mnopqrstuvwx                                           |
-| `amount`                                                                           | [operations.X402PayAmountRequest](../../models/operations/x402payamountrequest.md) | :heavy_check_mark:                                                                 | Payment amount in USDC                                                             | 0.5                                                                                |
-| `merchant`                                                                         | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | Merchant identifier                                                                | weather-api.com                                                                    |
-| `merchant_address`                                                                 | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | Merchant wallet for settlement                                                     | 0xABC...                                                                           |
-| `mcc`                                                                              | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | Merchant category code                                                             |                                                                                    |
-| `resource_url`                                                                     | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | URL being paid for                                                                 |                                                                                    |
-| `network`                                                                          | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | N/A                                                                                |                                                                                    |
-| `retries`                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                   | :heavy_minus_sign:                                                                 | Configuration to override the default retry behavior of the client.                |                                                                                    |
-
-### Response
-
-**[operations.X402PayResponse](../../models/operations/x402payresponse.md)**
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Errors
 
 | Error Type                       | Status Code                      | Content Type                     |
 | -------------------------------- | -------------------------------- | -------------------------------- |
-| models.errors.Error              | 400, 401, 403, 404               | application/json                 |
+| models.errors.X402PayGoneError   | 410                              | application/json                 |
 | models.errors.Mag3ntDefaultError | 4XX, 5XX                         | \*/\*                            |
 
 ## x402_discover

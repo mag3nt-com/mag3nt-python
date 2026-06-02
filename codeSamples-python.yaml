@@ -88,6 +88,23 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/api/ap2/settle"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: ap2Settle
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.ap2.ap2_settle(payer_card_id="<id>", payer_card_token="<value>", receiver_card_id="<id>", amount=5732.53, network="eip155:8453")
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/api/balance"]["get"]
     update:
       x-codeSamples:
@@ -173,6 +190,23 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/api/cards/{id}/fund"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: cardsTopUp
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.cards.cards_top_up(id="<id>", amount=25)
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/api/cards/{id}/transactions"]["get"]
     update:
       x-codeSamples:
@@ -219,6 +253,23 @@ actions:
             with Mag3nt() as m_client:
 
                 res = m_client.status.status_get_config()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/fund/verify"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: fundingVerify
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.funding.funding_verify(tx_hash="<value>", network="eip155:8453", asset="USDC")
 
                 # Handle response
                 print(res)
@@ -356,23 +407,6 @@ actions:
 
                 # Handle response
                 print(res)
-  - target: $["paths"]["/api/mpp/pay"]["post"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: mppPay
-          source: |-
-            from mag3nt import Mag3nt
-
-
-            with Mag3nt(
-                api_key_auth="<YOUR_API_KEY_HERE>",
-            ) as m_client:
-
-                res = m_client.mpp.mpp_pay(card_id="<id>", card_token="<value>", amount="345.29", network="eip155:8453")
-
-                # Handle response
-                print(res)
   - target: $["paths"]["/api/mpp/receive"]["post"]
     update:
       x-codeSamples:
@@ -472,6 +506,23 @@ actions:
             ) as m_client:
 
                 res = m_client.mpp.mpp_streams_get(id="<id>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/pay"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: paymentsExecute
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.payments.payments_execute(card_id="sx_a66a6666-...", card_token="tok_3b9fe670-...", url="https://api.weather.com/forecast", method="POST")
 
                 # Handle response
                 print(res)
@@ -633,6 +684,108 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/api/wallet/balance"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: fundingGetWalletBalance
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.funding.funding_get_wallet_balance(network="eip155:8453", asset="USDC")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/webhooks"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: webhooksList
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.webhooks.webhooks_list()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/webhooks"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: webhooksCreate
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.webhooks.webhooks_create(url="https://api.acme.com/hooks/mag3nt")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/webhooks/{id}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: webhooksDelete
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.webhooks.webhooks_delete(id="<id>")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/withdraw"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: withdrawalsCreate
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.withdrawals.withdrawals_create(amount=50, network="eip155:8453", asset="USDC")
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/api/withdrawals"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: withdrawalsList
+          source: |-
+            from mag3nt import Mag3nt
+
+
+            with Mag3nt(
+                api_key_auth="<YOUR_API_KEY_HERE>",
+            ) as m_client:
+
+                res = m_client.withdrawals.withdrawals_list()
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/api/x402/discover"]["get"]
     update:
       x-codeSamples:
@@ -647,23 +800,6 @@ actions:
             ) as m_client:
 
                 res = m_client.x402.x402_discover(url="https://happy-fireplace.name/")
-
-                # Handle response
-                print(res)
-  - target: $["paths"]["/api/x402/pay"]["post"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: x402Pay
-          source: |-
-            from mag3nt import Mag3nt
-
-
-            with Mag3nt(
-                api_key_auth="<YOUR_API_KEY_HERE>",
-            ) as m_client:
-
-                res = m_client.x402.x402_pay(card_id="sx_a66a6666-...", card_token="tok_3b9fe670-...", amount=0.5, merchant="weather-api.com", merchant_address="0xABC...", network="eip155:8453")
 
                 # Handle response
                 print(res)

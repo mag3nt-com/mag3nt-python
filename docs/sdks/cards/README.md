@@ -14,6 +14,7 @@ Virtual payment card lifecycle
 * [cards_claim](#cards_claim) - Claim a card using its token
 * [cards_update_controls](#cards_update_controls) - Update card spending controls
 * [cards_list_transactions](#cards_list_transactions) - List transactions for a card
+* [cards_top_up](#cards_top_up) - Add funds to an existing card from treasury balance
 
 ## cards_list
 
@@ -344,4 +345,47 @@ with Mag3nt(
 
 | Error Type                       | Status Code                      | Content Type                     |
 | -------------------------------- | -------------------------------- | -------------------------------- |
+| models.errors.Mag3ntDefaultError | 4XX, 5XX                         | \*/\*                            |
+
+## cards_top_up
+
+Top up an ACTIVE card by allocating additional USDC from your treasury balance. The allocation is atomic: insufficient balance returns 403.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="cardsTopUp" method="post" path="/api/cards/{id}/fund" -->
+```python
+from mag3nt import Mag3nt
+
+
+with Mag3nt(
+    api_key_auth="<YOUR_API_KEY_HERE>",
+) as m_client:
+
+    res = m_client.cards.cards_top_up(id="<id>", amount=25)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                | Example                                                                    |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `id`                                                                       | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |                                                                            |
+| `amount`                                                                   | [operations.CardsTopUpAmount](../../models/operations/cardstopupamount.md) | :heavy_check_mark:                                                         | Amount in USDC to add                                                      | 25                                                                         |
+| `retries`                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)           | :heavy_minus_sign:                                                         | Configuration to override the default retry behavior of the client.        |                                                                            |
+
+### Response
+
+**[operations.CardsTopUpResponse](../../models/operations/cardstopupresponse.md)**
+
+### Errors
+
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.errors.BalanceError       | 403                              | application/json                 |
+| models.errors.Error              | 404                              | application/json                 |
 | models.errors.Mag3ntDefaultError | 4XX, 5XX                         | \*/\*                            |

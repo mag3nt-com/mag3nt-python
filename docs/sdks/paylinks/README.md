@@ -207,11 +207,11 @@ with Mag3nt() as m_client:
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.errors.Error              | 404                              | application/json                 |
-| models.errors.GoneError          | 410                              | application/json                 |
-| models.errors.Mag3ntDefaultError | 4XX, 5XX                         | \*/\*                            |
+| Error Type                               | Status Code                              | Content Type                             |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| models.errors.Error                      | 404                                      | application/json                         |
+| models.errors.PayLinksGetStatusGoneError | 410                                      | application/json                         |
+| models.errors.Mag3ntDefaultError         | 4XX, 5XX                                 | \*/\*                                    |
 
 ## pay_links_resolve
 

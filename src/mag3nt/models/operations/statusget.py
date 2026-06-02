@@ -130,14 +130,14 @@ class Mpp(BaseModel):
         return m
 
 
-class SettlementTypedDict(TypedDict):
+class StatusGetSettlementTypedDict(TypedDict):
     status: NotRequired[str]
     fee_model: NotRequired[str]
     engine: NotRequired[str]
     supported_networks: NotRequired[List[str]]
 
 
-class Settlement(BaseModel):
+class StatusGetSettlement(BaseModel):
     status: Optional[str] = None
 
     fee_model: Optional[str] = None
@@ -167,7 +167,7 @@ class ProtocolsTypedDict(TypedDict):
     x402: NotRequired[X402TypedDict]
     ap2: NotRequired[Ap2TypedDict]
     mpp: NotRequired[MppTypedDict]
-    settlement: NotRequired[SettlementTypedDict]
+    settlement: NotRequired[StatusGetSettlementTypedDict]
 
 
 class Protocols(BaseModel):
@@ -177,7 +177,7 @@ class Protocols(BaseModel):
 
     mpp: Optional[Mpp] = None
 
-    settlement: Optional[Settlement] = None
+    settlement: Optional[StatusGetSettlement] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

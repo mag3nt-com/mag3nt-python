@@ -1,0 +1,13 @@
+# BadRequestError
+
+Missing fields or amount too small to cover fee
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `error`                                                                                            | *Optional[str]*                                                                                    | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `withdrawal_fee`                                                                                   | [Optional[operations.BadRequestWithdrawalFee]](../../models/operations/badrequestwithdrawalfee.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `minimum_withdrawal`                                                                               | [Optional[operations.MinimumWithdrawal]](../../models/operations/minimumwithdrawal.md)             | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `network`                                                                                          | *Optional[str]*                                                                                    | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

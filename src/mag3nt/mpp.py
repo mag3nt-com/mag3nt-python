@@ -5,36 +5,29 @@ from mag3nt import models, utils
 from mag3nt._hooks import HookContext
 from mag3nt.types import OptionalNullable, UNSET
 from mag3nt.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Mapping, Optional, Union
+from typing import Any, Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class Mpp(BaseSDK):
     r"""Micropayment Protocol with streaming"""
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def mpp_pay(
         self,
         *,
-        card_id: str,
-        card_token: str,
-        amount: Union[
-            models.operations.MppPayAmount, models.operations.MppPayAmountTypedDict
-        ],
-        merchant: Optional[str] = None,
-        merchant_address: Optional[str] = None,
-        network: Optional[str] = "eip155:8453",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.operations.MppPayResponse:
-        r"""Make a micropayment via MPP protocol
+    ):
+        r"""(Removed) Make a micropayment via MPP protocol
 
-        :param card_id:
-        :param card_token:
-        :param amount:
-        :param merchant:
-        :param merchant_address:
-        :param network:
+        This proprietary push endpoint has been removed. Use POST /api/pay with { card_id, card_token, url } instead. It automatically decodes the MPP challenge and settles on-chain.
+
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -49,32 +42,19 @@ class Mpp(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        request = models.operations.MppPayRequest(
-            card_id=card_id,
-            card_token=card_token,
-            amount=amount,
-            merchant=merchant,
-            merchant_address=merchant_address,
-            network=network,
-        )
-
         req = self._build_request(
             method="POST",
             path="/api/mpp/pay",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
-            request_body_required=True,
+            request=None,
+            request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.operations.MppPayRequest
-            ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -104,8 +84,14 @@ class Mpp(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.operations.MppPayResponse, http_res)
+        response_data: Any = None
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                models.errors.MppPayGoneErrorData, http_res
+            )
+            raise models.errors.MppPayGoneError(response_data, http_res)
+        if utils.match_response(http_res, "2XX", "*"):
+            return
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.errors.Mag3ntDefaultError(
@@ -119,30 +105,22 @@ class Mpp(BaseSDK):
 
         raise models.errors.Mag3ntDefaultError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def mpp_pay_async(
         self,
         *,
-        card_id: str,
-        card_token: str,
-        amount: Union[
-            models.operations.MppPayAmount, models.operations.MppPayAmountTypedDict
-        ],
-        merchant: Optional[str] = None,
-        merchant_address: Optional[str] = None,
-        network: Optional[str] = "eip155:8453",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.operations.MppPayResponse:
-        r"""Make a micropayment via MPP protocol
+    ):
+        r"""(Removed) Make a micropayment via MPP protocol
 
-        :param card_id:
-        :param card_token:
-        :param amount:
-        :param merchant:
-        :param merchant_address:
-        :param network:
+        This proprietary push endpoint has been removed. Use POST /api/pay with { card_id, card_token, url } instead. It automatically decodes the MPP challenge and settles on-chain.
+
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -157,32 +135,19 @@ class Mpp(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        request = models.operations.MppPayRequest(
-            card_id=card_id,
-            card_token=card_token,
-            amount=amount,
-            merchant=merchant,
-            merchant_address=merchant_address,
-            network=network,
-        )
-
         req = self._build_request_async(
             method="POST",
             path="/api/mpp/pay",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
-            request_body_required=True,
+            request=None,
+            request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.operations.MppPayRequest
-            ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -212,8 +177,14 @@ class Mpp(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.operations.MppPayResponse, http_res)
+        response_data: Any = None
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                models.errors.MppPayGoneErrorData, http_res
+            )
+            raise models.errors.MppPayGoneError(response_data, http_res)
+        if utils.match_response(http_res, "2XX", "*"):
+            return
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.errors.Mag3ntDefaultError(

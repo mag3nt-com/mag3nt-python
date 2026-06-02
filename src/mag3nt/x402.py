@@ -6,45 +6,28 @@ from mag3nt._hooks import HookContext
 from mag3nt.types import OptionalNullable, UNSET
 from mag3nt.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class X402(BaseSDK):
     r"""HTTP 402 payment protocol"""
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def x402_pay(
         self,
         *,
-        card_id: str,
-        card_token: str,
-        amount: Union[
-            models.operations.X402PayAmountRequest,
-            models.operations.X402PayAmountRequestTypedDict,
-        ],
-        merchant: Optional[str] = None,
-        merchant_address: Optional[str] = None,
-        mcc: Optional[str] = None,
-        resource_url: Optional[str] = None,
-        network: Optional[str] = "eip155:8453",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.operations.X402PayResponse:
-        r"""Pay for a service via x402 protocol
+    ):
+        r"""(Removed) Pay for a service via x402 protocol
 
-        Authorizes a payment against a funded card. The card must be ACTIVE with sufficient allocation. Returns payment headers the agent can attach to retry the original 402 request.
+        This proprietary push endpoint has been removed. Use POST /api/pay with { card_id, card_token, url } instead. It automatically detects x402 and settles on-chain.
 
 
-        If set, this operation will use `api_key_auth` from the global security.
-
-        :param card_id: Card identifier (sx_...)
-        :param card_token: Card secret token (tok_...)
-        :param amount: Payment amount in USDC
-        :param merchant: Merchant identifier
-        :param merchant_address: Merchant wallet for settlement
-        :param mcc: Merchant category code
-        :param resource_url: URL being paid for
-        :param network:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -59,36 +42,20 @@ class X402(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        request = models.operations.X402PayRequest(
-            card_id=card_id,
-            card_token=card_token,
-            amount=amount,
-            merchant=merchant,
-            merchant_address=merchant_address,
-            mcc=mcc,
-            resource_url=resource_url,
-            network=network,
-        )
-
         req = self._build_request(
             method="POST",
             path="/api/x402/pay",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
-            request_body_required=True,
+            request=None,
+            request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.operations.X402PayRequest
-            ),
             allow_empty_value=None,
-            allowed_fields=["api_key_auth"],
             timeout_ms=timeout_ms,
         )
 
@@ -118,13 +85,13 @@ class X402(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.operations.X402PayResponse, http_res)
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            response_data = unmarshal_json_response(models.errors.ErrorData, http_res)
-            raise models.errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                models.errors.X402PayGoneErrorData, http_res
+            )
+            raise models.errors.X402PayGoneError(response_data, http_res)
+        if utils.match_response(http_res, "2XX", "*"):
+            return
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.errors.Mag3ntDefaultError(
@@ -138,40 +105,22 @@ class X402(BaseSDK):
 
         raise models.errors.Mag3ntDefaultError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def x402_pay_async(
         self,
         *,
-        card_id: str,
-        card_token: str,
-        amount: Union[
-            models.operations.X402PayAmountRequest,
-            models.operations.X402PayAmountRequestTypedDict,
-        ],
-        merchant: Optional[str] = None,
-        merchant_address: Optional[str] = None,
-        mcc: Optional[str] = None,
-        resource_url: Optional[str] = None,
-        network: Optional[str] = "eip155:8453",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.operations.X402PayResponse:
-        r"""Pay for a service via x402 protocol
+    ):
+        r"""(Removed) Pay for a service via x402 protocol
 
-        Authorizes a payment against a funded card. The card must be ACTIVE with sufficient allocation. Returns payment headers the agent can attach to retry the original 402 request.
+        This proprietary push endpoint has been removed. Use POST /api/pay with { card_id, card_token, url } instead. It automatically detects x402 and settles on-chain.
 
 
-        If set, this operation will use `api_key_auth` from the global security.
-
-        :param card_id: Card identifier (sx_...)
-        :param card_token: Card secret token (tok_...)
-        :param amount: Payment amount in USDC
-        :param merchant: Merchant identifier
-        :param merchant_address: Merchant wallet for settlement
-        :param mcc: Merchant category code
-        :param resource_url: URL being paid for
-        :param network:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -186,36 +135,20 @@ class X402(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        request = models.operations.X402PayRequest(
-            card_id=card_id,
-            card_token=card_token,
-            amount=amount,
-            merchant=merchant,
-            merchant_address=merchant_address,
-            mcc=mcc,
-            resource_url=resource_url,
-            network=network,
-        )
-
         req = self._build_request_async(
             method="POST",
             path="/api/x402/pay",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
-            request_body_required=True,
+            request=None,
+            request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.operations.X402PayRequest
-            ),
             allow_empty_value=None,
-            allowed_fields=["api_key_auth"],
             timeout_ms=timeout_ms,
         )
 
@@ -245,13 +178,13 @@ class X402(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.operations.X402PayResponse, http_res)
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            response_data = unmarshal_json_response(models.errors.ErrorData, http_res)
-            raise models.errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "410", "application/json"):
+            response_data = unmarshal_json_response(
+                models.errors.X402PayGoneErrorData, http_res
+            )
+            raise models.errors.X402PayGoneError(response_data, http_res)
+        if utils.match_response(http_res, "2XX", "*"):
+            return
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.errors.Mag3ntDefaultError(
