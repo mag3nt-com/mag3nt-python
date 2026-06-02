@@ -1,6 +1,4 @@
-# NetAmount
-
-Amount sent on-chain (amount - fee)
+# Fee
 
 
 ## Supported Types
