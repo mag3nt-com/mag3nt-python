@@ -963,29 +963,24 @@ class Ap2(BaseSDK):
     def ap2_settle(
         self,
         *,
-        payer_card_id: str,
-        payer_card_token: str,
-        receiver_card_id: str,
-        amount: Union[
-            models.operations.Ap2SettleAmount,
-            models.operations.Ap2SettleAmountTypedDict,
-        ],
-        network: Optional[str] = "eip155:8453",
+        pay_link_code: str,
+        closed_mandate: str,
+        card_token: str,
+        open_mandate: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.operations.Ap2SettleResponse:
-        r"""Settle an AP2 payment between agents
+        r"""Settle a pay link with a closed AP2 Payment Mandate
 
-        Completes a peer-to-peer payment between two agent cards. Debits the payer card and credits the receiver card atomically.
+        Settles a mag3nt pay link by consuming a closed AP2 Payment Mandate (`mandate.payment.1`). The mandate is verified for signature, expiry, and payee scoping against the link; if an open mandate is supplied, the open→closed chain is re-verified. The payer card named by the mandate is authenticated via its card token, then the payer card is debited and the link credited atomically. Idempotent on the mandate `jti` (replay-safe).
 
 
-        :param payer_card_id:
-        :param payer_card_token:
-        :param receiver_card_id:
-        :param amount:
-        :param network:
+        :param pay_link_code: Code of the pay link being settled.
+        :param closed_mandate: Closed AP2 Payment Mandate (mandate.payment.1) as an SD-JWT.
+        :param card_token: Token of the payer card named by the mandate (authorizes the debit).
+        :param open_mandate: Optional open AP2 mandate; when present the open→closed chain is re-verified.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1002,11 +997,10 @@ class Ap2(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.operations.Ap2SettleRequest(
-            payer_card_id=payer_card_id,
-            payer_card_token=payer_card_token,
-            receiver_card_id=receiver_card_id,
-            amount=amount,
-            network=network,
+            pay_link_code=pay_link_code,
+            closed_mandate=closed_mandate,
+            open_mandate=open_mandate,
+            card_token=card_token,
         )
 
         req = self._build_request(
@@ -1057,9 +1051,15 @@ class Ap2(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.operations.Ap2SettleResponse, http_res
+                models.operations.Ap2SettleResponseBody2, http_res
             )
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.operations.Ap2SettleResponseBody1, http_res
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "404", "422"], "application/json"
+        ):
             response_data = unmarshal_json_response(models.errors.ErrorData, http_res)
             raise models.errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1078,29 +1078,24 @@ class Ap2(BaseSDK):
     async def ap2_settle_async(
         self,
         *,
-        payer_card_id: str,
-        payer_card_token: str,
-        receiver_card_id: str,
-        amount: Union[
-            models.operations.Ap2SettleAmount,
-            models.operations.Ap2SettleAmountTypedDict,
-        ],
-        network: Optional[str] = "eip155:8453",
+        pay_link_code: str,
+        closed_mandate: str,
+        card_token: str,
+        open_mandate: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.operations.Ap2SettleResponse:
-        r"""Settle an AP2 payment between agents
+        r"""Settle a pay link with a closed AP2 Payment Mandate
 
-        Completes a peer-to-peer payment between two agent cards. Debits the payer card and credits the receiver card atomically.
+        Settles a mag3nt pay link by consuming a closed AP2 Payment Mandate (`mandate.payment.1`). The mandate is verified for signature, expiry, and payee scoping against the link; if an open mandate is supplied, the open→closed chain is re-verified. The payer card named by the mandate is authenticated via its card token, then the payer card is debited and the link credited atomically. Idempotent on the mandate `jti` (replay-safe).
 
 
-        :param payer_card_id:
-        :param payer_card_token:
-        :param receiver_card_id:
-        :param amount:
-        :param network:
+        :param pay_link_code: Code of the pay link being settled.
+        :param closed_mandate: Closed AP2 Payment Mandate (mandate.payment.1) as an SD-JWT.
+        :param card_token: Token of the payer card named by the mandate (authorizes the debit).
+        :param open_mandate: Optional open AP2 mandate; when present the open→closed chain is re-verified.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1117,11 +1112,10 @@ class Ap2(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.operations.Ap2SettleRequest(
-            payer_card_id=payer_card_id,
-            payer_card_token=payer_card_token,
-            receiver_card_id=receiver_card_id,
-            amount=amount,
-            network=network,
+            pay_link_code=pay_link_code,
+            closed_mandate=closed_mandate,
+            open_mandate=open_mandate,
+            card_token=card_token,
         )
 
         req = self._build_request_async(
@@ -1172,9 +1166,15 @@ class Ap2(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.operations.Ap2SettleResponse, http_res
+                models.operations.Ap2SettleResponseBody2, http_res
             )
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(
+                models.operations.Ap2SettleResponseBody1, http_res
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "404", "422"], "application/json"
+        ):
             response_data = unmarshal_json_response(models.errors.ErrorData, http_res)
             raise models.errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):

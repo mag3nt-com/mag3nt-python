@@ -1,11 +1,17 @@
 # Ap2SettleResponse
 
-Settlement complete
 
+## Supported Types
 
-## Fields
+### `operations.Ap2SettleResponseBody1`
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `success`          | *Optional[bool]*   | :heavy_minus_sign: | N/A                |
-| `transaction_id`   | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+```python
+value: operations.Ap2SettleResponseBody1 = /* values here */
+```
+
+### `operations.Ap2SettleResponseBody2`
+
+```python
+value: operations.Ap2SettleResponseBody2 = /* values here */
+```
+

@@ -201,7 +201,7 @@ with Mag3nt(
 * [ap2_create_mandate](docs/sdks/ap2/README.md#ap2_create_mandate) - Create a spending mandate for recurring AP2 payments
 * [ap2_execute](docs/sdks/ap2/README.md#ap2_execute) - Execute a payment against an AP2 mandate
 * [ap2_list_mandates](docs/sdks/ap2/README.md#ap2_list_mandates) - List mandates for a card
-* [ap2_settle](docs/sdks/ap2/README.md#ap2_settle) - Settle an AP2 payment between agents
+* [ap2_settle](docs/sdks/ap2/README.md#ap2_settle) - Settle a pay link with a closed AP2 Payment Mandate
 
 ### [Cards](docs/sdks/cards/README.md)
 

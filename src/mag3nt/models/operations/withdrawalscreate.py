@@ -119,11 +119,15 @@ WithdrawalFee = TypeAliasType("WithdrawalFee", Union[float, str])
 r"""Flat network fee retained by platform"""
 
 
-NetAmountTypedDict = TypeAliasType("NetAmountTypedDict", Union[float, str])
+WithdrawalsCreateNetAmountTypedDict = TypeAliasType(
+    "WithdrawalsCreateNetAmountTypedDict", Union[float, str]
+)
 r"""Amount sent on-chain (amount - fee)"""
 
 
-NetAmount = TypeAliasType("NetAmount", Union[float, str])
+WithdrawalsCreateNetAmount = TypeAliasType(
+    "WithdrawalsCreateNetAmount", Union[float, str]
+)
 r"""Amount sent on-chain (amount - fee)"""
 
 
@@ -136,7 +140,7 @@ class WithdrawalsCreateResponseTypedDict(TypedDict):
     r"""Gross amount deducted from balance"""
     withdrawal_fee: NotRequired[WithdrawalFeeTypedDict]
     r"""Flat network fee retained by platform"""
-    net_amount: NotRequired[NetAmountTypedDict]
+    net_amount: NotRequired[WithdrawalsCreateNetAmountTypedDict]
     r"""Amount sent on-chain (amount - fee)"""
     status: NotRequired[str]
     balance: NotRequired[components_balance.BalanceTypedDict]
@@ -155,7 +159,7 @@ class WithdrawalsCreateResponse(BaseModel):
     withdrawal_fee: Optional[WithdrawalFee] = None
     r"""Flat network fee retained by platform"""
 
-    net_amount: Optional[NetAmount] = None
+    net_amount: Optional[WithdrawalsCreateNetAmount] = None
     r"""Amount sent on-chain (amount - fee)"""
 
     status: Optional[str] = None
