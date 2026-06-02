@@ -6,7 +6,7 @@ Micropayment Protocol with streaming
 
 ### Available Operations
 
-* [mpp_pay](#mpp_pay) - Make a micropayment via MPP protocol
+* [~~mpp_pay~~](#mpp_pay) - (Removed) Make a micropayment via MPP protocol :warning: **Deprecated**
 * [mpp_create_session](#mpp_create_session) - Create an MPP payment session
 * [mpp_discover](#mpp_discover) - Discover MPP capabilities for a URL
 * [mpp_receive](#mpp_receive) - Verify and accept an MPP payment
@@ -15,9 +15,12 @@ Micropayment Protocol with streaming
 * [mpp_streams_close](#mpp_streams_close) - Close a payment stream
 * [mpp_streams_get](#mpp_streams_get) - Get payment stream details
 
-## mpp_pay
+## ~~mpp_pay~~
 
-Make a micropayment via MPP protocol
+This proprietary push endpoint has been removed. Use POST /api/pay with { card_id, card_token, url } instead. It automatically decodes the MPP challenge and settles on-chain.
+
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -30,10 +33,9 @@ with Mag3nt(
     api_key_auth="<YOUR_API_KEY_HERE>",
 ) as m_client:
 
-    res = m_client.mpp.mpp_pay(card_id="<id>", card_token="<value>", amount="345.29", network="eip155:8453")
+    m_client.mpp.mpp_pay()
 
-    # Handle response
-    print(res)
+    # Use the SDK ...
 
 ```
 
@@ -41,22 +43,13 @@ with Mag3nt(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `card_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `card_token`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `amount`                                                            | [operations.MppPayAmount](../../models/operations/mpppayamount.md)  | :heavy_check_mark:                                                  | N/A                                                                 |
-| `merchant`                                                          | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `merchant_address`                                                  | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `network`                                                           | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[operations.MppPayResponse](../../models/operations/mpppayresponse.md)**
 
 ### Errors
 
 | Error Type                       | Status Code                      | Content Type                     |
 | -------------------------------- | -------------------------------- | -------------------------------- |
+| models.errors.MppPayGoneError    | 410                              | application/json                 |
 | models.errors.Mag3ntDefaultError | 4XX, 5XX                         | \*/\*                            |
 
 ## mpp_create_session

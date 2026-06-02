@@ -841,9 +841,9 @@ class PayLinks(BaseSDK):
             raise models.errors.Error(response_data, http_res)
         if utils.match_response(http_res, "410", "application/json"):
             response_data = unmarshal_json_response(
-                models.errors.GoneErrorData, http_res
+                models.errors.PayLinksGetStatusGoneErrorData, http_res
             )
-            raise models.errors.GoneError(response_data, http_res)
+            raise models.errors.PayLinksGetStatusGoneError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.errors.Mag3ntDefaultError(
@@ -939,9 +939,9 @@ class PayLinks(BaseSDK):
             raise models.errors.Error(response_data, http_res)
         if utils.match_response(http_res, "410", "application/json"):
             response_data = unmarshal_json_response(
-                models.errors.GoneErrorData, http_res
+                models.errors.PayLinksGetStatusGoneErrorData, http_res
             )
-            raise models.errors.GoneError(response_data, http_res)
+            raise models.errors.PayLinksGetStatusGoneError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.errors.Mag3ntDefaultError(

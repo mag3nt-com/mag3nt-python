@@ -14,6 +14,9 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *mag3
 ## Summary
 
 mag3nt API: Payment infrastructure for AI agents. Issue virtual cards, pay for API access via x402/AP2/MPP protocols, and settle in USDC on Base.
+
+
+For more information about the API: [mag3nt documentation](https://docs.mag3nt.com)
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -198,6 +201,7 @@ with Mag3nt(
 * [ap2_create_mandate](docs/sdks/ap2/README.md#ap2_create_mandate) - Create a spending mandate for recurring AP2 payments
 * [ap2_execute](docs/sdks/ap2/README.md#ap2_execute) - Execute a payment against an AP2 mandate
 * [ap2_list_mandates](docs/sdks/ap2/README.md#ap2_list_mandates) - List mandates for a card
+* [ap2_settle](docs/sdks/ap2/README.md#ap2_settle) - Settle an AP2 payment between agents
 
 ### [Cards](docs/sdks/cards/README.md)
 
@@ -209,11 +213,14 @@ with Mag3nt(
 * [cards_claim](docs/sdks/cards/README.md#cards_claim) - Claim a card using its token
 * [cards_update_controls](docs/sdks/cards/README.md#cards_update_controls) - Update card spending controls
 * [cards_list_transactions](docs/sdks/cards/README.md#cards_list_transactions) - List transactions for a card
+* [cards_top_up](docs/sdks/cards/README.md#cards_top_up) - Add funds to an existing card from treasury balance
 
 ### [Funding](docs/sdks/funding/README.md)
 
 * [funding_list_tokens](docs/sdks/funding/README.md#funding_list_tokens) - List accepted tokens per network
 * [funding_get_balance](docs/sdks/funding/README.md#funding_get_balance) - Get treasury balance for authenticated wallet
+* [funding_verify](docs/sdks/funding/README.md#funding_verify) - Verify an on-chain funding transaction
+* [funding_get_wallet_balance](docs/sdks/funding/README.md#funding_get_wallet_balance) - Get on-chain token balance for a wallet address
 
 ### [Keys](docs/sdks/keys/README.md)
 
@@ -224,7 +231,7 @@ with Mag3nt(
 
 ### [Mpp](docs/sdks/mpp/README.md)
 
-* [mpp_pay](docs/sdks/mpp/README.md#mpp_pay) - Make a micropayment via MPP protocol
+* [~~mpp_pay~~](docs/sdks/mpp/README.md#mpp_pay) - (Removed) Make a micropayment via MPP protocol :warning: **Deprecated**
 * [mpp_create_session](docs/sdks/mpp/README.md#mpp_create_session) - Create an MPP payment session
 * [mpp_discover](docs/sdks/mpp/README.md#mpp_discover) - Discover MPP capabilities for a URL
 * [mpp_receive](docs/sdks/mpp/README.md#mpp_receive) - Verify and accept an MPP payment
@@ -244,6 +251,10 @@ with Mag3nt(
 * [pay_links_prepare](docs/sdks/paylinks/README.md#pay_links_prepare) - Prepare payment intent for a pay link
 * [pay_links_settle](docs/sdks/paylinks/README.md#pay_links_settle) - Settle a pay link payment
 
+### [Payments](docs/sdks/payments/README.md)
+
+* [payments_execute](docs/sdks/payments/README.md#payments_execute) - Execute a universal outbound payment
+
 ### [Settlement](docs/sdks/settlement/README.md)
 
 * [settlement_get_status](docs/sdks/settlement/README.md#settlement_get_status) - Check settlement status for a transaction
@@ -253,9 +264,20 @@ with Mag3nt(
 * [status_get](docs/sdks/status/README.md#status_get) - Get platform status, supported protocols, and capabilities
 * [status_get_config](docs/sdks/status/README.md#status_get_config) - Get treasury addresses and token registry
 
+### [Webhooks](docs/sdks/webhooks/README.md)
+
+* [webhooks_create](docs/sdks/webhooks/README.md#webhooks_create) - Register a webhook endpoint
+* [webhooks_list](docs/sdks/webhooks/README.md#webhooks_list) - List registered webhooks
+* [webhooks_delete](docs/sdks/webhooks/README.md#webhooks_delete) - Delete a webhook endpoint
+
+### [Withdrawals](docs/sdks/withdrawals/README.md)
+
+* [withdrawals_create](docs/sdks/withdrawals/README.md#withdrawals_create) - Withdraw unspent funds back to your wallet
+* [withdrawals_list](docs/sdks/withdrawals/README.md#withdrawals_list) - List withdrawal history
+
 ### [X402](docs/sdks/x402/README.md)
 
-* [x402_pay](docs/sdks/x402/README.md#x402_pay) - Pay for a service via x402 protocol
+* [~~x402_pay~~](docs/sdks/x402/README.md#x402_pay) - (Removed) Pay for a service via x402 protocol :warning: **Deprecated**
 * [x402_discover](docs/sdks/x402/README.md#x402_discover) - Discover x402 payment requirements for a URL
 * [x402_receive](docs/sdks/x402/README.md#x402_receive) - Verify and accept an x402 payment
 
@@ -352,7 +374,7 @@ with Mag3nt(
 **Primary error:**
 * [`Mag3ntError`](./src/mag3nt/models/errors/mag3nterror.py): The base class for HTTP error responses.
 
-<details><summary>Less common errors (8)</summary>
+<details><summary>Less common errors (12)</summary>
 
 <br />
 
@@ -363,9 +385,13 @@ with Mag3nt(
 
 
 **Inherit from [`Mag3ntError`](./src/mag3nt/models/errors/mag3nterror.py)**:
-* [`Error`](./src/mag3nt/models/errors/error.py): Applicable to 4 of 41 methods.*
-* [`BalanceError`](./src/mag3nt/models/errors/balanceerror.py): Insufficient balance. Status code `403`. Applicable to 2 of 41 methods.*
-* [`GoneError`](./src/mag3nt/models/errors/goneerror.py): Pay link has been used. Status code `410`. Applicable to 1 of 41 methods.*
+* [`Error`](./src/mag3nt/models/errors/error.py): Applicable to 9 of 51 methods.*
+* [`BalanceError`](./src/mag3nt/models/errors/balanceerror.py): Status code `403`. Applicable to 3 of 51 methods.*
+* [`BadRequestError`](./src/mag3nt/models/errors/badrequesterror.py): Missing fields or amount too small to cover fee. Status code `400`. Applicable to 1 of 51 methods.*
+* [`ForbiddenError`](./src/mag3nt/models/errors/forbiddenerror.py): Insufficient balance. Status code `403`. Applicable to 1 of 51 methods.*
+* [`X402PayGoneError`](./src/mag3nt/models/errors/x402paygoneerror.py): Endpoint removed. Migrate to /api/pay. Status code `410`. Applicable to 1 of 51 methods.*
+* [`MppPayGoneError`](./src/mag3nt/models/errors/mpppaygoneerror.py): Endpoint removed. Migrate to /api/pay. Status code `410`. Applicable to 1 of 51 methods.*
+* [`PayLinksGetStatusGoneError`](./src/mag3nt/models/errors/paylinksgetstatusgoneerror.py): Pay link has been used. Status code `410`. Applicable to 1 of 51 methods.*
 * [`ResponseValidationError`](./src/mag3nt/models/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

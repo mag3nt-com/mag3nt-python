@@ -21,13 +21,19 @@ if TYPE_CHECKING:
     from mag3nt.keys import Keys
     from mag3nt.mpp import Mpp
     from mag3nt.pay_links import PayLinks
+    from mag3nt.payments import Payments
     from mag3nt.settlement import Settlement
     from mag3nt.status import Status
+    from mag3nt.webhooks import Webhooks
+    from mag3nt.withdrawals import Withdrawals
     from mag3nt.x402 import X402
 
 
 class Mag3nt(BaseSDK):
-    r"""mag3nt API: Payment infrastructure for AI agents. Issue virtual cards, pay for API access via x402/AP2/MPP protocols, and settle in USDC on Base."""
+    r"""mag3nt API: Payment infrastructure for AI agents. Issue virtual cards, pay for API access via x402/AP2/MPP protocols, and settle in USDC on Base.
+
+    https://docs.mag3nt.com - mag3nt documentation
+    """
 
     cards: "Cards"
     r"""Virtual payment card lifecycle"""
@@ -35,6 +41,10 @@ class Mag3nt(BaseSDK):
     r"""Developer API key management"""
     funding: "Funding"
     r"""Treasury deposits and balances"""
+    withdrawals: "Withdrawals"
+    r"""Withdraw unspent funds back to wallet"""
+    payments: "Payments"
+    r"""Universal outbound protocol payments"""
     x402: "X402"
     r"""HTTP 402 payment protocol"""
     status: "Status"
@@ -47,16 +57,21 @@ class Mag3nt(BaseSDK):
     r"""Shareable payment URLs"""
     settlement: "Settlement"
     r"""On-chain settlement status"""
+    webhooks: "Webhooks"
+    r"""Signed payment.settled notifications for sellers"""
     _sub_sdk_map = {
         "cards": ("mag3nt.cards", "Cards"),
         "keys": ("mag3nt.keys", "Keys"),
         "funding": ("mag3nt.funding", "Funding"),
+        "withdrawals": ("mag3nt.withdrawals", "Withdrawals"),
+        "payments": ("mag3nt.payments", "Payments"),
         "x402": ("mag3nt.x402", "X402"),
         "status": ("mag3nt.status", "Status"),
         "ap2": ("mag3nt.ap2", "Ap2"),
         "mpp": ("mag3nt.mpp", "Mpp"),
         "pay_links": ("mag3nt.pay_links", "PayLinks"),
         "settlement": ("mag3nt.settlement", "Settlement"),
+        "webhooks": ("mag3nt.webhooks", "Webhooks"),
     }
 
     def __init__(

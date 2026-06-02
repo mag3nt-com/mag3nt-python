@@ -16,7 +16,7 @@ TransactionAmountTypedDict = TypeAliasType(
 TransactionAmount = TypeAliasType("TransactionAmount", Union[float, str])
 
 
-Protocol = Union[
+TransactionProtocol = Union[
     Literal[
         "x402",
         "ap2",
@@ -31,7 +31,7 @@ class TransactionTypedDict(TypedDict):
     card_id: NotRequired[str]
     amount: NotRequired[TransactionAmountTypedDict]
     merchant: NotRequired[str]
-    protocol: NotRequired[Protocol]
+    protocol: NotRequired[TransactionProtocol]
     status: NotRequired[str]
     tx_hash: NotRequired[str]
     network: NotRequired[str]
@@ -47,7 +47,7 @@ class Transaction(BaseModel):
 
     merchant: Optional[str] = None
 
-    protocol: Optional[Protocol] = None
+    protocol: Optional[TransactionProtocol] = None
 
     status: Optional[str] = None
 

@@ -8,20 +8,20 @@ from mag3nt.types import BaseModel
 from typing import Optional
 
 
-class GoneErrorData(BaseModel):
+class PayLinksGetStatusGoneErrorData(BaseModel):
     status: Optional[str] = None
     error: Optional[str] = None
 
 
 @dataclass(unsafe_hash=True)
-class GoneError(Mag3ntError):
+class PayLinksGetStatusGoneError(Mag3ntError):
     r"""Pay link has been used"""
 
-    data: GoneErrorData = field(hash=False)
+    data: PayLinksGetStatusGoneErrorData = field(hash=False)
 
     def __init__(
         self,
-        data: GoneErrorData,
+        data: PayLinksGetStatusGoneErrorData,
         raw_response: httpx.Response,
         body: Optional[str] = None,
     ):

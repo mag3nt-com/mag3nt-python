@@ -9,21 +9,40 @@ if TYPE_CHECKING:
     from .balanceerror import BalanceError, BalanceErrorData
     from .error import Error, ErrorData
     from .mag3ntdefaulterror import Mag3ntDefaultError
+    from .mpppay import MppPayGoneError, MppPayGoneErrorData
     from .no_response_error import NoResponseError
-    from .paylinksgetstatus import GoneError, GoneErrorData
+    from .paylinksgetstatus import (
+        PayLinksGetStatusGoneError,
+        PayLinksGetStatusGoneErrorData,
+    )
     from .responsevalidationerror import ResponseValidationError
+    from .withdrawalscreate import (
+        BadRequestError,
+        BadRequestErrorData,
+        ForbiddenError,
+        ForbiddenErrorData,
+    )
+    from .x402pay import X402PayGoneError, X402PayGoneErrorData
 
 __all__ = [
+    "BadRequestError",
+    "BadRequestErrorData",
     "BalanceError",
     "BalanceErrorData",
     "Error",
     "ErrorData",
-    "GoneError",
-    "GoneErrorData",
+    "ForbiddenError",
+    "ForbiddenErrorData",
     "Mag3ntDefaultError",
     "Mag3ntError",
+    "MppPayGoneError",
+    "MppPayGoneErrorData",
     "NoResponseError",
+    "PayLinksGetStatusGoneError",
+    "PayLinksGetStatusGoneErrorData",
     "ResponseValidationError",
+    "X402PayGoneError",
+    "X402PayGoneErrorData",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -32,10 +51,18 @@ _dynamic_imports: dict[str, str] = {
     "Error": ".error",
     "ErrorData": ".error",
     "Mag3ntDefaultError": ".mag3ntdefaulterror",
+    "MppPayGoneError": ".mpppay",
+    "MppPayGoneErrorData": ".mpppay",
     "NoResponseError": ".no_response_error",
-    "GoneError": ".paylinksgetstatus",
-    "GoneErrorData": ".paylinksgetstatus",
+    "PayLinksGetStatusGoneError": ".paylinksgetstatus",
+    "PayLinksGetStatusGoneErrorData": ".paylinksgetstatus",
     "ResponseValidationError": ".responsevalidationerror",
+    "BadRequestError": ".withdrawalscreate",
+    "BadRequestErrorData": ".withdrawalscreate",
+    "ForbiddenError": ".withdrawalscreate",
+    "ForbiddenErrorData": ".withdrawalscreate",
+    "X402PayGoneError": ".x402pay",
+    "X402PayGoneErrorData": ".x402pay",
 }
 
 

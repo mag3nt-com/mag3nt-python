@@ -13,7 +13,7 @@ Developer API key management
 
 ## keys_create
 
-Returns the raw key once. Store it securely — it cannot be retrieved again.
+Returns the raw key once. Store it securely: it cannot be retrieved again.
 
 ### Example Usage
 

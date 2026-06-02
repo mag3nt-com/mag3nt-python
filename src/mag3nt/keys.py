@@ -21,7 +21,7 @@ class Keys(BaseSDK):
     ) -> models.operations.KeysCreateResponse:
         r"""Generate a new API key
 
-        Returns the raw key once. Store it securely — it cannot be retrieved again.
+        Returns the raw key once. Store it securely: it cannot be retrieved again.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -106,7 +106,7 @@ class Keys(BaseSDK):
     ) -> models.operations.KeysCreateResponse:
         r"""Generate a new API key
 
-        Returns the raw key once. Store it securely — it cannot be retrieved again.
+        Returns the raw key once. Store it securely: it cannot be retrieved again.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

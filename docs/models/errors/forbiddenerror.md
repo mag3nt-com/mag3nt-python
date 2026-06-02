@@ -1,0 +1,13 @@
+# ForbiddenError
+
+Insufficient balance
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `error`                                                                                                  | *Optional[str]*                                                                                          | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
+| `available`                                                                                              | [Optional[operations.WithdrawalsCreateAvailable]](../../models/operations/withdrawalscreateavailable.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
+| `requested`                                                                                              | [Optional[operations.Requested]](../../models/operations/requested.md)                                   | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
+| `withdrawal_fee`                                                                                         | [Optional[operations.ForbiddenWithdrawalFee]](../../models/operations/forbiddenwithdrawalfee.md)         | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
